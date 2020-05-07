@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="930.0" styleClass="pane-login" stylesheets="@../../../../res/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.LoginController">
+<AnchorPane prefHeight="560.0" prefWidth="930.0" styleClass="pane-login" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.LoginController">
     <children>
         <AnchorPane layoutX="14.0" layoutY="71.0" prefHeight="418.0" prefWidth="320.0" style="-fx-background-color: #000000; -fx-background-radius: 25; -fx-border-radius: 25;">
             <children>
@@ -22,8 +22,8 @@
                     </font>
                 </Label>
                 <AnchorPane layoutX="115.0" layoutY="61.0" prefHeight="6.0" prefWidth="90.0" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" />
-                <JFXTextField fx:id="user" layoutX="69.0" layoutY="107.0" prefHeight="26.0" prefWidth="237.0" promptText="Account Number" styleClass="text-white" stylesheets="@../../../../res/style.css" />
-                <JFXPasswordField fx:id="password" layoutX="70.0" layoutY="163.0" prefHeight="26.0" prefWidth="237.0" promptText="Password" styleClass="text-white" stylesheets="@../../../../res/style.css" />
+                <JFXTextField fx:id="user" layoutX="69.0" layoutY="107.0" prefHeight="26.0" prefWidth="237.0" promptText="Account Number" styleClass="text-white" stylesheets="@style.css" />
+                <JFXPasswordField fx:id="password" layoutX="70.0" layoutY="163.0" prefHeight="26.0" prefWidth="237.0" promptText="Password" styleClass="text-white" stylesheets="@style.css" />
                 <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="51.0" layoutY="306.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="224.0" ripplerFill="#e210e2" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" text="Login" textFill="WHITE">
                     <font>
                         <Font size="22.0" />
@@ -39,13 +39,13 @@
                         <Image url="@../../../../res/icons/profile-icon.png" />
                     </image>
                 </ImageView>
-                <JFXButton fx:id="showPassword" buttonType="RAISED" layoutX="279.0" layoutY="167.0" prefHeight="26.0" prefWidth="29.0" ripplerFill="#673ab7" styleClass="text-gery" stylesheets="@../../../../res/style.css" text="⚫" textAlignment="CENTER" />
+                <JFXButton fx:id="showPassword" buttonType="RAISED" layoutX="279.0" layoutY="167.0" prefHeight="26.0" prefWidth="29.0" ripplerFill="#673ab7" styleClass="text-gery" stylesheets="@style.css" text="⚫" textAlignment="CENTER" />
                 <Label fx:id="showPasswordHover" layoutX="232.0" layoutY="160.0" text="Show Password" textAlignment="CENTER" textFill="#b5b5b5" visible="false">
                     <font>
                         <Font size="11.0" />
                     </font>
                 </Label>
-                <JFXSlider fx:id="type" layoutX="93.0" layoutY="241.0" majorTickUnit="1.0" max="2.0" minorTickCount="0" snapToTicks="true" stylesheets="@../../../../res/style.css" value="1.0">
+                <JFXSlider fx:id="type" layoutX="93.0" layoutY="241.0" majorTickUnit="1.0" max="2.0" minorTickCount="0" snapToTicks="true" stylesheets="@style.css" value="1.0">
                     <styleClass>
                         <String fx:value="jfx-slider" />
                         <String fx:value="colored-track" />
