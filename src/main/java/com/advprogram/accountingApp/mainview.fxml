@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.MainViewController">
+   <left>
+      <BorderPane BorderPane.alignment="CENTER">
+         <right>
+            <VBox prefHeight="561.0" prefWidth="132.0" spacing="4.0" style="-fx-background-color: #181818;" BorderPane.alignment="CENTER">
+               <JFXButton fx:id="profilebtn" prefHeight="87.0" prefWidth="138.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Profile" textFill="WHITE">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton fx:id="accInfobtn" prefHeight="88.0" prefWidth="138.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Accounts Info" textFill="WHITE">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton fx:id="accCreatebtn" prefHeight="85.0" prefWidth="138.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="New Account" textFill="WHITE">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton fx:id="logoutbtn" prefHeight="85.0" prefWidth="138.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Logout" textFill="WHITE">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </JFXButton>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </VBox>
+         </right>
+         <left>
+            <VBox alignment="TOP_CENTER" onMouseEntered="#initialize" prefHeight="561.0" prefWidth="51.0" spacing="47.0" style="-fx-background-color: #191919;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@../icons/profile-icon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@../icons/info-icon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="2.0" top="6.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@../icons/create-icon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets right="2.0" top="3.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                     <image>
+                        <Image url="@../icons/logout-icon.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="33.0" />
+               </padding>
+            </VBox>
+         </left>
+      </BorderPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="centerAnchor" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="795.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="125.0" layoutY="80.0" prefHeight="191.0" prefWidth="545.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="43.0" prefHeight="41.0" prefWidth="157.0" text="Name :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="107.0" prefHeight="41.0" prefWidth="157.0" text="Account No :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="id" layoutX="241.0" layoutY="107.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@Style.css" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="name" layoutX="241.0" layoutY="43.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@Style.css" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow color="#99df92" height="45.14" radius="23.9575" spread="0.25" width="52.69" />
+                     </effect>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="accInfoPage" prefHeight="561.0" prefWidth="770.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="123.0" layoutY="43.0" prefHeight="85.0" prefWidth="524.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;">
+                     <effect>
+                        <DropShadow color="#99df92" height="45.14" radius="23.9575" spread="0.25" width="52.69" />
+                     </effect>
+                     <children>
+                        <Label layoutX="32.0" layoutY="14.0" prefHeight="56.0" prefWidth="198.0" text="Account Number :" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="searchTxt" layoutX="251.0" layoutY="17.0" prefHeight="50.0" prefWidth="240.0" promptText="Account No." styleClass="text-white" stylesheets="@Style.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton fx:id="searchbtn" layoutX="323.0" layoutY="151.0" prefHeight="52.0" prefWidth="124.0" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" text="Search" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <AnchorPane fx:id="accFndAnchor" layoutX="123.0" layoutY="256.0" prefHeight="249.0" prefWidth="524.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" visible="false">
+                     <children>
+                        <Label layoutX="14.0" layoutY="43.0" prefHeight="41.0" prefWidth="157.0" text="Name :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameFnd" layoutX="257.0" layoutY="43.0" prefHeight="41.0" prefWidth="247.0" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="105.0" prefHeight="41.0" prefWidth="157.0" text="Account No :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="accNoFnd" layoutX="257.0" layoutY="104.0" prefHeight="41.0" prefWidth="246.0" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="169.0" prefHeight="41.0" prefWidth="157.0" text="Balance :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="balanceFnd" layoutX="259.0" layoutY="169.0" prefHeight="41.0" prefWidth="244.0" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow color="#99df92" height="45.14" radius="23.9575" spread="0.25" width="52.69" />
+                     </effect>
+                  </AnchorPane>
+                  <Label fx:id="accNotFndLbl" layoutX="296.0" layoutY="221.0" text="Account not found !" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="accCreatePage" prefHeight="561.0" prefWidth="795.0" visible="false">
+               <children>
+                  <AnchorPane fx:id="accNewAnchor" layoutX="126.0" layoutY="72.0" prefHeight="249.0" prefWidth="545.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="43.0" prefHeight="41.0" prefWidth="157.0" text="Name :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="107.0" prefHeight="41.0" prefWidth="157.0" text="Account No :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="169.0" prefHeight="41.0" prefWidth="157.0" text="Balance :" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="nameNew" layoutX="252.0" layoutY="47.0" prefHeight="33.0" prefWidth="265.0" promptText="Name" styleClass="text-white" stylesheets="@Style.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="accNoNew" layoutX="252.0" layoutY="108.0" prefHeight="33.0" prefWidth="265.0" promptText="Account Number" styleClass="text-white" stylesheets="@Style.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="balanceNew" layoutX="252.0" layoutY="173.0" prefHeight="33.0" prefWidth="265.0" promptText="Balance" styleClass="text-white" stylesheets="@Style.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                     <effect>
+                        <DropShadow color="#99df92" height="45.14" radius="23.9575" spread="0.25" width="52.69" />
+                     </effect>
+                  </AnchorPane>
+                  <JFXButton fx:id="createbtn" layoutX="336.0" layoutY="360.0" prefHeight="52.0" prefWidth="124.0" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" text="Create" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="accCreatedlbl" layoutX="315.0" layoutY="432.0" prefHeight="0.0" prefWidth="165.0" stylesheets="@Style.css" text="Account Created !" textAlignment="CENTER" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="accExistslbl" layoutX="155.0" layoutY="432.0" prefHeight="0.0" prefWidth="486.0" stylesheets="@Style.css" text="An account with this account number already exists !" textAlignment="CENTER" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="invalidAccNoCr" layoutX="283.0" layoutY="432.0" prefHeight="0.0" prefWidth="232.0" stylesheets="@Style.css" text="Invalid account number !" textAlignment="CENTER" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="invalidBalanceCr" layoutX="323.0" layoutY="432.0" prefHeight="10.0" prefWidth="150.0" stylesheets="@Style.css" text="Invalid balance !" textAlignment="CENTER" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="invalidNameCr" layoutX="334.0" layoutY="432.0" prefHeight="0.0" prefWidth="131.0" stylesheets="@Style.css" text="Invalid name !" textAlignment="CENTER" textFill="RED" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
