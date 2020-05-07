@@ -1,0 +1,44 @@
+.text-white {
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: grey;
+}
+.text-gery {
+    -fx-text-fill: grey;
+}
+/* Styling the slider track */
+.jfx-slider > .track {
+    -fx-background-color: #ec407a;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+    -fx-background-color: #476acb;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+    -fx-background-color: #673ab7;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+    -fx-background-color: #673ab7;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+.pane-login{
+    -fx-background-image: url("../../../../res/backgrounds/login-background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1000 600;
+    -fx-background-position: center center;
+}
+.pane-main{
+    -fx-background-image: url("../../../../res/backgrounds/main-background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1000 600;
+    -fx-background-position: center center;
+}
