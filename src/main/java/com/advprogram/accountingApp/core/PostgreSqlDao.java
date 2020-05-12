@@ -5,7 +5,7 @@
  */
 package main.java.com.advprogram.accountingApp.core;
 
-import main.java.com.advprogram.accountingApp.api.User;
+import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 
 import java.sql.Connection;
@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  *
  * @author Hiram K. <https://github.com/IdelsTak>
  */
-public class PostgreSqlDao implements Dao<User, Integer> {
+public class PostgreSqlDao implements Dao<Employee, Integer> {
 
     private static final Logger LOGGER = Logger.getLogger(PostgreSqlDao.class.getName());
     private final Optional<Connection> connection;
@@ -34,9 +34,9 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public Optional<User> get(int id) {
+    public Optional<Employee> get(int id) {
         return connection.flatMap(conn -> {
-            Optional<User> customer = Optional.empty();
+            Optional<Employee> customer = Optional.empty();
             String sql = "SELECT * FROM customer WHERE customer_id = " + id;
 
             try (Statement statement = conn.createStatement();
@@ -47,7 +47,7 @@ public class PostgreSqlDao implements Dao<User, Integer> {
                     String lastName = resultSet.getString("last_name");
                     String email = resultSet.getString("email");
 
-                    customer = Optional.of(new User(id, firstName, lastName, email));
+                    customer = Optional.of(new Employee(id, firstName, lastName, email));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", customer.get());
                 }
@@ -60,8 +60,8 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public Collection<User> getAll() {
-        Collection<User> customers = new ArrayList<>();
+    public Collection<Employee> getAll() {
+        Collection<Employee> customers = new ArrayList<>();
         String sql = "SELECT * FROM customer";
 
         connection.ifPresent(conn -> {
@@ -74,7 +74,7 @@ public class PostgreSqlDao implements Dao<User, Integer> {
                     String lastName = resultSet.getString("last_name");
                     String email = resultSet.getString("email");
 
-                    User customer = new User(id, firstName, lastName, email);
+                    Employee customer = new Employee(id, firstName, lastName, email);
 
                     customers.add(customer);
 
@@ -90,9 +90,9 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public Optional<Integer> save(User customer) {
+    public Optional<Integer> save(Employee customer) {
         String message = "The customer to be added should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
+        Employee nonNullCustomer = Objects.requireNonNull(customer, message);
         String sql = "INSERT INTO "
                 + "customer(first_name, last_name, email) "
                 + "VALUES(?, ?, ?)";
@@ -129,9 +129,9 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public void update(User customer) {
+    public void update(Employee customer) {
         String message = "The customer to be updated should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
+        Employee nonNullCustomer = Objects.requireNonNull(customer, message);
         String sql = "UPDATE customer "
                 + "SET "
                 + "first_name = ?, "
@@ -160,9 +160,9 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public void delete(User customer) {
+    public void delete(Employee customer) {
         String message = "The customer to be deleted should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
+        Employee nonNullCustomer = Objects.requireNonNull(customer, message);
         String sql = "DELETE FROM customer WHERE customer_id = ?";
 
         connection.ifPresent(conn -> {

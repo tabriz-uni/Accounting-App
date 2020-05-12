@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXSlider;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import main.java.com.advprogram.accountingApp.api.Employee;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class LoginController {
     @FXML private JFXSlider type;
     @FXML private Label InvalidCrdLbl;
     private String revealedPassword;
-    private final String manager = "Ali Shams@1@1";
+    private final String accountant = "Ali Shams@1@1";
 
     public void initialize() {
 
@@ -45,36 +46,24 @@ public class LoginController {
             if (type.getValue() == 0)
             {
                 String Info;
-                Info = authorizeManager();
+                Info = authorizeAccountant();
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
                 if (Info != null) {
                     InvalidCrdLbl.setVisible(false);
-                    loginManager.authenticatedManager(Info);
-                }
-            }
-
-            else if (type.getValue() == 1)
-            {
-                String Info;
-                Info = authorizeStudent(loginManager.getStudentList());
-                if (Info == null)
-                    InvalidCrdLbl.setVisible(true);
-                if (Info != null) {
-                    InvalidCrdLbl.setVisible(false);
-                    loginManager.authenticatedStudent(Info);
+                    loginManager.authenticatedAccountant(Info);
                 }
             }
 
             else if (type.getValue() == 2)
             {
                 String Info;
-                Info = authorizeProfessor(loginManager.getProfessorList());
+                Info = authorizeEmployee(loginManager.getEmployeeList());
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
                 if (Info != null) {
                     InvalidCrdLbl.setVisible(false);
-                    loginManager.authenticatedProfessor(Info);
+                    loginManager.authenticatedEmployee(Info);
                 }
             }
         });
@@ -87,8 +76,8 @@ public class LoginController {
      * otherwise, return null.
      */
 
-    private String authorizeProfessor(ArrayList<Professor> professorList) {
-        for (Professor professor : professorList) {
+    private String authorizeEmployee(ArrayList<Employee> professorList) {
+        for (Employee professor : professorList) {
             if (professor.getId().equals(user.getText()) && professor.getPass().equals(password.getText()))
                 return (professor.getName() + "@" + professor.getId());
         }
@@ -96,19 +85,10 @@ public class LoginController {
                 null;
     }
 
-    private String authorizeManager() {
-        if (user.getText().equals(manager.split("@")[1]) && password.getText().equals(manager.split("@")[2]))
-            return manager;
+    private String authorizeAccountant() {
+        if (user.getText().equals(accountant.split("@")[1]) && password.getText().equals(accountant.split("@")[2]))
+            return accountant;
         else
             return null;
-    }
-
-    private String authorizeStudent(ArrayList<Student> studentList) {
-        for (Student student : studentList) {
-            if (student.getId().equals(user.getText()) && student.getPass().equals(password.getText()))
-                return (student.getName() + "@" + student.getId());
-        }
-        return
-                null;
     }
 }

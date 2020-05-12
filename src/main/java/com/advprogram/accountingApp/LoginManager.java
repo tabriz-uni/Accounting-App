@@ -61,8 +61,8 @@ public class LoginManager extends Node {
      * Callback method invoked to notify that a user has been authenticated.
      * Will show the main application screen.
      */
-    public void authenticatedManager(String sessionID) {
-        showManagerView(sessionID);
+    public void authenticatedAccountant(String sessionID) {
+        showAccountantView(sessionID);
     }
 
     public void authenticatedProfessor(String sessionID) { showProfessorView(sessionID); }
@@ -91,13 +91,13 @@ public class LoginManager extends Node {
         }
     }
 
-    private void showManagerView(String sessionID) {
+    private void showAccountantView(String sessionID) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("managerView.fxml")
+                    getClass().getResource("accountantView.fxml")
             );
             scene.setRoot(loader.load());
-            ManagerController controller =
+            AccountantController controller =
                     loader.<ManagerController>getController();
             controller.initSessionID(this, sessionID);
         } catch (IOException ex) {
