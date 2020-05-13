@@ -55,7 +55,7 @@ public class LoginController {
                 }
             }
 
-            else if (type.getValue() == 2)
+            else if (type.getValue() == 1)
             {
                 String Info;
                 Info = authorizeEmployee(loginManager.getEmployeeList());
