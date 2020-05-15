@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.com.advprogram.accountingApp.core;
 
-import main.java.com.advprogram.accountingApp.api.User;
+import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 
 import java.sql.Connection;
@@ -20,11 +15,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Hiram K. <https://github.com/IdelsTak>
- */
-public class PostgreSqlDao implements Dao<User, Integer> {
+public class PostgreSqlDao implements Dao<Employee, Integer> {
 
     private static final Logger LOGGER = Logger.getLogger(PostgreSqlDao.class.getName());
     private final Optional<Connection> connection;
@@ -34,10 +25,10 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public Optional<User> get(int id) {
+    public Optional<Employee> get(int id) {
         return connection.flatMap(conn -> {
-            Optional<User> customer = Optional.empty();
-            String sql = "SELECT * FROM customer WHERE customer_id = " + id;
+            Optional<Employee> employee = Optional.empty();
+            String sql = "SELECT * FROM employee WHERE employee_id = " + id;
 
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
@@ -47,38 +38,38 @@ public class PostgreSqlDao implements Dao<User, Integer> {
                     String lastName = resultSet.getString("last_name");
                     String email = resultSet.getString("email");
 
-                    customer = Optional.of(new User(id, firstName, lastName, email));
+                    employee = Optional.of(new Employee(id, firstName, lastName, email));
 
-                    LOGGER.log(Level.INFO, "Found {0} in database", customer.get());
+                    LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
 
-            return customer;
+            return employee;
         });
     }
 
     @Override
-    public Collection<User> getAll() {
-        Collection<User> customers = new ArrayList<>();
-        String sql = "SELECT * FROM customer";
+    public Collection<Employee> getAll() {
+        Collection<Employee> employees = new ArrayList<>();
+        String sql = "SELECT * FROM employee";
 
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("customer_id");
+                    int id = resultSet.getInt("employee_id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String email = resultSet.getString("email");
 
-                    User customer = new User(id, firstName, lastName, email);
+                    Employee employee = new Employee(id, firstName, lastName, email);
 
-                    customers.add(customer);
+                    employees.add(employee);
 
-                    LOGGER.log(Level.INFO, "Found {0} in database", customer);
+                    LOGGER.log(Level.INFO, "Found {0} in database", employee);
                 }
 
             } catch (SQLException ex) {
@@ -86,15 +77,15 @@ public class PostgreSqlDao implements Dao<User, Integer> {
             }
         });
 
-        return customers;
+        return employees;
     }
 
     @Override
-    public Optional<Integer> save(User customer) {
-        String message = "The customer to be added should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
+    public Optional<Integer> save(Employee employee) {
+        String message = "The employee to be added should not be null";
+        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "customer(first_name, last_name, email) "
+                + "employee(first_name, last_name, email) "
                 + "VALUES(?, ?, ?)";
 
         return connection.flatMap(conn -> {
@@ -129,16 +120,16 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public void update(User customer) {
-        String message = "The customer to be updated should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
-        String sql = "UPDATE customer "
+    public void update(Employee employee) {
+        String message = "The employee to be updated should not be null";
+        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
+        String sql = "UPDATE employee "
                 + "SET "
                 + "first_name = ?, "
                 + "last_name = ?, "
                 + "email = ? "
                 + "WHERE "
-                + "customer_id = ?";
+                + "employee_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -150,7 +141,7 @@ public class PostgreSqlDao implements Dao<User, Integer> {
 
                 int numberOfUpdatedRows = statement.executeUpdate();
 
-                LOGGER.log(Level.INFO, "Was the customer updated successfully? {0}",
+                LOGGER.log(Level.INFO, "Was the employee updated successfully? {0}",
                         numberOfUpdatedRows > 0);
 
             } catch (SQLException ex) {
@@ -160,10 +151,10 @@ public class PostgreSqlDao implements Dao<User, Integer> {
     }
 
     @Override
-    public void delete(User customer) {
-        String message = "The customer to be deleted should not be null";
-        User nonNullCustomer = Objects.requireNonNull(customer, message);
-        String sql = "DELETE FROM customer WHERE customer_id = ?";
+    public void delete(Employee employee) {
+        String message = "The employee to be deleted should not be null";
+        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
+        String sql = "DELETE FROM employee WHERE employee_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -172,7 +163,7 @@ public class PostgreSqlDao implements Dao<User, Integer> {
 
                 int numberOfDeletedRows = statement.executeUpdate();
 
-                LOGGER.log(Level.INFO, "Was the customer deleted successfully? {0}",
+                LOGGER.log(Level.INFO, "Was the employee deleted successfully? {0}",
                         numberOfDeletedRows > 0);
 
             } catch (SQLException ex) {

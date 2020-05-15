@@ -1,25 +1,21 @@
 package main.java.com.advprogram.accountingApp.api;
 
-/**
- *
- * @author Hiram K. <https://github.com/IdelsTak>
- */
-public class User {
+public class Employee {
 
     private Integer id;
     private String firstName;
     private String lastName;
     private String email;
 
-    public User(String firstName, String lastName) {
+    public Employee(String firstName, String lastName) {
         this(firstName, lastName, null);
     }
 
-    public User(String firstName, String lastName, String email) {
+    public Employee(String firstName, String lastName, String email) {
         this(null, firstName, lastName, email);
     }
 
-    public User(Integer id, String firstName, String lastName, String email) {
+    public Employee(Integer id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,7 +56,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User["
+        return "Employee["
                 + "id=" + id
                 + ", firstName=" + firstName
                 + ", lastName=" + lastName
