@@ -5,21 +5,21 @@ public class Employee {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String email;
+    private String password;
 
     public Employee(String firstName, String lastName) {
         this(firstName, lastName, null);
     }
 
-    public Employee(String firstName, String lastName, String email) {
-        this(null, firstName, lastName, email);
+    public Employee(String firstName, String lastName, String password) {
+        this(null, firstName, lastName, password);
     }
 
-    public Employee(Integer id, String firstName, String lastName, String email) {
+    public Employee(Integer id, String firstName, String lastName, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -46,12 +46,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Employee {
                 + "id=" + id
                 + ", firstName=" + firstName
                 + ", lastName=" + lastName
-                + ", email=" + email
+                + ", password=" + password
                 + ']';
     }
 

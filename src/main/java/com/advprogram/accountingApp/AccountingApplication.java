@@ -15,7 +15,9 @@ public class AccountingApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public static void main(String[] args) { launch(args); }
 
+    /*
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
@@ -25,8 +27,8 @@ public class AccountingApplication extends Application {
         else
             System.out.println("The password does not match.");
     }
+     */
 
-    public static void main(String[] args) { launch(args); }
     /*
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
     private static final Dao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlDao();

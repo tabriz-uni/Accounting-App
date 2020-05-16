@@ -12,27 +12,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jfoenix-9.0.8.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/postgresql-42.2.12.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="org.mindrot:jbcrypt:0.4" level="project" />
-    <orderEntry type="library" name="jbcrypt-0.4" level="project" />
     <orderEntry type="library" name="postgresql-42.2.12" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
   </component>

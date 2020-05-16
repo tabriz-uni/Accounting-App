@@ -6,32 +6,15 @@ import java.util.Scanner;
 import java.util.logging.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import main.java.com.advprogram.accountingApp.api.Employee;
 
 /** Manages control flow for logins */
 public class LoginManager extends Node {
 
-    protected ArrayList<Employee> employeeList = new ArrayList<>();
-
     private final Scene scene;
-
-    public ArrayList<Employee> getEmployeeList() { return employeeList; }
 
     public LoginManager(Scene scene) {
         this.scene = scene;
-    }
-
-    public void createArrayLists() throws FileNotFoundException {
-        Scanner employeeSc = new Scanner(new File(urls[0]));
-
-        String line;
-        while (employeeSc.hasNextLine()) {
-            line = employeeSc.nextLine();
-            Employee employee = new Employee();
-            employee.setName(line.split("@")[0]);
-            employee.setId(line.split("@")[1]);
-            employee.setPass(line.split("@")[2]);
-            employeeList.add(employee);
-        }
     }
 
     /**
