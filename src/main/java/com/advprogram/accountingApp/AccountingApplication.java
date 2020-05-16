@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class AccountingApplication extends Application {
     @Override
@@ -14,6 +15,17 @@ public class AccountingApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    private String hashPassword(String plainTextPassword){
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+    private void checkPass(String plainPassword, String hashedPassword) {
+        if (BCrypt.checkpw(plainPassword, hashedPassword))
+            System.out.println("The password matches.");
+        else
+            System.out.println("The password does not match.");
+    }
+
     public static void main(String[] args) { launch(args); }
     /*
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
