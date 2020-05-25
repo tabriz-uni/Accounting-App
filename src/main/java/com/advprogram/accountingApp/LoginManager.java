@@ -25,7 +25,7 @@ public class LoginManager extends Node {
         showAccountantView(sessionID);
     }
 
-    public void authenticatedEmployee(String sessionID) { showEmployeeView(sessionID); }
+    public void authenticatedEmployee(Integer sessionID) { showEmployeeView(sessionID); }
 
     /**
      * Callback method invoked to notify that a user has logged out of the main application.
@@ -42,7 +42,7 @@ public class LoginManager extends Node {
             );
             scene.setRoot(loader.load());
             LoginController controller =
-                    loader.<LoginController>getController();
+                    loader.getController();
             controller.initManager(this);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,14 +56,14 @@ public class LoginManager extends Node {
             );
             scene.setRoot(loader.load());
             AccountantController controller =
-                    loader.<AccountantController>getController();
+                    loader.getController();
             controller.initSessionID(this, sessionID);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void showEmployeeView(String sessionID) {
+    private void showEmployeeView(Integer sessionID) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("employeeView.fxml")

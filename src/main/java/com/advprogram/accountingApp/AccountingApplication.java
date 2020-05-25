@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class AccountingApplication extends Application {
     @Override

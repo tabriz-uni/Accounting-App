@@ -16,9 +16,8 @@ public class EmployeeController {
 
     public void initialize() { }
 
-    public void initSessionID(final LoginManager loginManager, String sessionID) {
-        lblName.setText(sessionID.split("@")[0]);
-        String userId = sessionID.split("@")[1];
+    public void initSessionID(final LoginManager loginManager, Integer sessionID) {
+        String userId = sessionID.toString();
         lblAccNo.setText(userId);
         /* Event handlers for the side menu items */
         btnProfilePage.setOnAction(event -> {
@@ -73,7 +72,7 @@ public class EmployeeController {
             Stage stage = (Stage) btnExit.getScene().getWindow();
             int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Log Out",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (input == 0) stage.close();;
+            if (input == 0) stage.close();
         });
 //        End of side menu handlers
 

@@ -36,9 +36,9 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                 if (resultSet.next()) {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
-                    String email = resultSet.getString("email");
+                    String pass = resultSet.getString("pass");
 
-                    employee = Optional.of(new Employee(id, firstName, lastName, email));
+                    employee = Optional.of(new Employee(id, firstName, lastName, pass));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
@@ -63,9 +63,9 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                     int id = resultSet.getInt("employee_id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
-                    String email = resultSet.getString("email");
+                    String pass = resultSet.getString("pass");
 
-                    Employee employee = new Employee(id, firstName, lastName, email);
+                    Employee employee = new Employee(id, firstName, lastName, pass);
 
                     employees.add(employee);
 
@@ -85,7 +85,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
         String message = "The employee to be added should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "employee(first_name, last_name, email) "
+                + "employee(first_name, last_name, pass) "
                 + "VALUES(?, ?, ?)";
 
         return connection.flatMap(conn -> {
@@ -96,7 +96,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
 
                 statement.setString(1, nonNullCustomer.getFirstName());
                 statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getEmail());
+                statement.setString(3, nonNullCustomer.getPass());
 
                 int numberOfInsertedRows = statement.executeUpdate();
 
@@ -127,7 +127,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                 + "SET "
                 + "first_name = ?, "
                 + "last_name = ?, "
-                + "email = ? "
+                + "pass = ? "
                 + "WHERE "
                 + "employee_id = ?";
 
@@ -136,7 +136,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
 
                 statement.setString(1, nonNullCustomer.getFirstName());
                 statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getEmail());
+                statement.setString(3, nonNullCustomer.getPass());
                 statement.setInt(4, nonNullCustomer.getId());
 
                 int numberOfUpdatedRows = statement.executeUpdate();

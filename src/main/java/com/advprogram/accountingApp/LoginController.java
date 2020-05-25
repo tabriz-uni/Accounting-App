@@ -5,8 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
+import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
+import main.java.com.advprogram.accountingApp.spi.Dao;
+import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.ArrayList;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Controls the login screen */
 public class LoginController {
@@ -20,9 +27,10 @@ public class LoginController {
     private String revealedPassword;
     private final String accountant = "Ali Shams@1@1";
 
-    public void initialize() {
+    private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
+    private static final Dao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlDao();
 
-    }
+    public void initialize() { }
     public void initManager(final LoginManager loginManager){
         showPassword.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             revealedPassword = password.getText();
@@ -57,8 +65,8 @@ public class LoginController {
 
             else if (type.getValue() == 1)
             {
-                String Info;
-                Info = authorizeEmployee(loginManager.getEmployeeList());
+                Integer Info;
+                Info = authorizeEmployee();
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
                 if (Info != null) {
@@ -76,13 +84,18 @@ public class LoginController {
      * otherwise, return null.
      */
 
-    private String authorizeEmployee(ArrayList<Employee> professorList) {
-        for (Employee professor : professorList) {
-            if (professor.getId().equals(user.getText()) && professor.getPass().equals(password.getText()))
-                return (professor.getName() + "@" + professor.getId());
+    private Integer authorizeEmployee() {
+        try {
+            Employee customer = getCustomer(Integer.parseInt(user.getText()));
+            boolean correct = checkPass(password.getText(), customer.getPass());
+            if (correct)
+                return (customer.getId());
+        } catch (NonExistentEntityException ex) {
+            InvalidCrdLbl.setVisible(true);
+            LOGGER.log(Level.WARNING, ex.getMessage());
+            return null;
         }
-        return
-                null;
+        return null;
     }
 
     private String authorizeAccountant() {
@@ -90,5 +103,17 @@ public class LoginController {
             return accountant;
         else
             return null;
+    }
+
+    private String hashPassword(String plainTextPassword){
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+    private boolean checkPass(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
+
+    private Employee getCustomer(int id) throws NonExistentEntityException {
+        Optional<Employee> customer = CUSTOMER_DAO.get(id);
+        return customer.orElseThrow(NonExistentCustomerException::new);
     }
 }
