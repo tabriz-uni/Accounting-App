@@ -10,7 +10,8 @@ import javax.swing.*;
 
 /** Controls the accountant screen */
 public class AccountantController {
-    @FXML private JFXButton btnProfilePage, btnProfessorsPage, btnStudentsPage, btnCoursesPage, btnConfirmPage, btnLogout, btnExit, btnConfirm;
+    @FXML private JFXButton btnProfilePage, btnProfessorsPage, btnStudentsPage,
+            btnCoursesPage, btnConfirmPage, btnLogout, btnExit, btnConfirm;
     @FXML private Label lblName, lblAccNo;
     @FXML private AnchorPane profilePage, professorsPage, studentsPage, coursesPage, confirmPage;
 
