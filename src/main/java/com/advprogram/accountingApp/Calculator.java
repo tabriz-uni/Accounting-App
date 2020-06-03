@@ -15,19 +15,28 @@ public class Calculator {
     public Calculator() { this.connection = JdbcConnection.getConnection(); }
 
     public void nextYear() {
+        GData refOld = getGData();
         IncreGlobalData();
         GData ref = getGData();
         IncreBaseSalary(ref);
     }
     private void IncreBaseSalary(GData ref) {
-        String sql = "UPDATE employee " +
+        String sqlH = "UPDATE employee " +
                 "SET " +
                 "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
+                " WHERE work_exp_here < 1";
+        String sqlNH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
+                " WHERE work_exp_here < 1";
+        /*
                 " WHERE work_exp_here IN " +
-                "(select work_exp_here from employee group by work_exp_here having count(wid) > 100)";
+                "(SELECT work_exp_here FROM employee GROUP BY work_exp_here > 12";
+         */
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement()){
-                 statement.executeUpdate(sql);
+                 statement.executeUpdate(sqlH);
+                 statement.executeUpdate(sqlNH);
         } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }

@@ -44,7 +44,7 @@ public class AccountingApplication extends Application {
         }
         //Test whether a customer can be added to the database
         Employee firstCustomer = new Employee("Manuel", "Kelley", "ManuelMKelley@jourrapide.com");
-        Employee secondCustomer = new Employee("Joshua", "Daulton", "JoshuaMDaulton@teleworm.us");
+        Employee secondCustomer = new Employee("Joshua", "Daulton"K, "JoshuaMDaulton@teleworm.us");
         Employee thirdCustomer = new Employee("April", "Ellis", "AprilMellis@jourrapide.com");
         addCustomer(firstCustomer).ifPresent(firstCustomer::setId);
         addCustomer(secondCustomer).ifPresent(secondCustomer::setId);

@@ -8,7 +8,7 @@ public class Employee extends User {
     private int workExpHere;
     private int baseSalary;
 
-    public Employee(Integer id, String firstName, String lastName, String pass) {
+    public Employee(int id, String firstName, String lastName, String pass) {
         super(id, firstName, lastName, pass);
     }
 

@@ -1,12 +1,12 @@
 package main.java.com.advprogram.accountingApp.api;
 
 public class User {
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
     private String pass;
 
-    public User(Integer id, String firstName, String lastName, String pass) {
+    public User(int id, String firstName, String lastName, String pass) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
