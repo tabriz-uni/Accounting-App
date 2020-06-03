@@ -1,67 +1,54 @@
 package main.java.com.advprogram.accountingApp.api;
 
-public class Employee {
+public class Employee extends User {
 
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String pass;
-
-    public Employee(String firstName, String lastName) {
-        this(firstName, lastName, null);
-    }
-
-    public Employee(String firstName, String lastName, String pass) {
-        this(null, firstName, lastName, pass);
-    }
+    private String title;
+    private int offsprings;
+    private int workExp;
+    private int workExpHere;
+    private int baseSalary;
 
     public Employee(Integer id, String firstName, String lastName, String pass) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.pass = pass;
+        super(id, firstName, lastName, pass);
     }
 
-    public int getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public int getOffsprings() {
+        return offsprings;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setOffsprings(int offsprings) {
+        this.offsprings = offsprings;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getWorkExp() {
+        return workExp;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setWorkExp(int workExp) {
+        this.workExp = workExp;
     }
 
-    public String getPass() {
-        return pass;
+    public int getWorkExpHere() {
+        return workExpHere;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setWorkExpHere(int workExpHere) {
+        this.workExpHere = workExpHere;
     }
 
-    @Override
-    public String toString() {
-        return "Employee["
-                + "id=" + id
-                + ", firstName=" + firstName
-                + ", lastName=" + lastName
-                + ", pass=" + pass
-                + ']';
+    public int getBaseSalary() {
+        return baseSalary;
     }
 
+    public void setBaseSalary(int baseSalary) {
+        this.baseSalary = baseSalary;
+    }
 }

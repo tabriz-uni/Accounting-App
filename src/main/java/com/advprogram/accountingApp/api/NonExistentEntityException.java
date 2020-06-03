@@ -5,10 +5,6 @@
  */
 package main.java.com.advprogram.accountingApp.api;
 
-/**
- *
- * @author Hiram K. <https://github.com/IdelsTak>
- */
 public class NonExistentEntityException extends Throwable {
 
     private static final long serialVersionUID = -3760558819369784286L;
