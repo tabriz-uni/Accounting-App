@@ -1,67 +1,54 @@
 package main.java.com.advprogram.accountingApp.api;
 
-public class Employee {
+public class Employee extends User {
 
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String pass;
+    private String title;
+    private int offsprings;
+    private int workExp;
+    private int workExpHere;
+    private int baseSalary;
 
-    public Employee(String firstName, String lastName) {
-        this(firstName, lastName, null);
+    public Employee(int id, String firstName, String lastName, String pass) {
+        super(id, firstName, lastName, pass);
     }
 
-    public Employee(String firstName, String lastName, String pass) {
-        this(null, firstName, lastName, pass);
+    public String getTitle() {
+        return title;
     }
 
-    public Employee(Integer id, String firstName, String lastName, String pass) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.pass = pass;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getId() {
-        return id;
+    public int getOffsprings() {
+        return offsprings;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOffsprings(int offsprings) {
+        this.offsprings = offsprings;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public int getWorkExp() {
+        return workExp;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setWorkExp(int workExp) {
+        this.workExp = workExp;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getWorkExpHere() {
+        return workExpHere;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setWorkExpHere(int workExpHere) {
+        this.workExpHere = workExpHere;
     }
 
-    public String getPass() {
-        return pass;
+    public int getBaseSalary() {
+        return baseSalary;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setBaseSalary(int baseSalary) {
+        this.baseSalary = baseSalary;
     }
-
-    @Override
-    public String toString() {
-        return "Employee["
-                + "id=" + id
-                + ", firstName=" + firstName
-                + ", lastName=" + lastName
-                + ", pass=" + pass
-                + ']';
-    }
-
 }

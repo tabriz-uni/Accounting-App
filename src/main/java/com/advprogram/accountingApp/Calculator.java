@@ -15,33 +15,29 @@ public class Calculator {
     public Calculator() { this.connection = JdbcConnection.getConnection(); }
 
     public void nextYear() {
+        GData refOld = getGData();
         IncreGlobalData();
-        var r = getGData();
-        Object object = getGData();
-        String sqlT = "SELECT * FROM global_data LIMIT 1";
-        var ref = new Object() {
-            int sabet_hogug;
-        };
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement();
-                 ResultSet rs = statement.executeQuery(sqlT)) {
-                ref.sabet_hogug = rs.getInt("sabet_hogug");
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-
-
+        GData ref = getGData();
+        IncreBaseSalary(ref);
     }
-    private void IncBaseSalary() {
-        String sql = "update title set base_salary = (base_salary * 1.5) +" + ref.sabet_hogug + + 4 + " where  IN" +
-                " (select fid from Worker  group by fid  having count(wid) > )";
+    private void IncreBaseSalary(GData ref) {
+        String sqlH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
+                " WHERE work_exp_here < 1";
+        String sqlNH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
+                " WHERE work_exp_here < 1";
+        /*
+                " WHERE work_exp_here IN " +
+                "(SELECT work_exp_here FROM employee GROUP BY work_exp_here > 12";
+         */
         connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
-
-
-            } catch (SQLException ex) {
+            try (Statement statement = conn.createStatement()){
+                 statement.executeUpdate(sqlH);
+                 statement.executeUpdate(sqlNH);
+        } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
         });
@@ -66,16 +62,17 @@ public class Calculator {
             }
         });
     }
-    private Object getGData() {
+    private GData getGData() {
         String sqlT = "SELECT * FROM global_data LIMIT 1";
-        var ref = new Object() {
-            int baseSalary;
-            int sabetHogug;
-        };
+        GData ref = new GData();
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement();
                  ResultSet rs = statement.executeQuery(sqlT)) {
                 ref.baseSalary = rs.getInt("base_salary");
+                ref.bonMaskan = rs.getInt("bon_maskan");
+                ref.bonNagdi = rs.getInt("bon_nagdi");
+                ref.hagOlad = rs.getInt("hag_olad");
+                ref.payeSanavat = rs.getInt("paye_sanavat");
                 ref.sabetHogug = rs.getInt("sabet_hogug");
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
