@@ -12,9 +12,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="org.mindrot:jbcrypt:0.4" level="project" />
     <orderEntry type="library" name="postgresql-42.2.12" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$PATH_TO_FX$/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$PATH_TO_FX$/lib" />
+        </SOURCES>
+        <jarDirectory url="file://$PATH_TO_FX$/lib" recursive="false" />
+        <jarDirectory url="file://$PATH_TO_FX$/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
