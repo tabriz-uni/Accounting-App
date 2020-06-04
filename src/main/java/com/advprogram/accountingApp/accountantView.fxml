@@ -52,7 +52,7 @@
                 </VBox>
             </left>
             <right>
-                <VBox alignment="TOP_CENTER" prefHeight="561.0" prefWidth="123.0" spacing="13.0" style="-fx-background-color: #181818;" BorderPane.alignment="CENTER">
+                <VBox alignment="TOP_CENTER" prefHeight="561.0" prefWidth="114.0" spacing="13.0" style="-fx-background-color: #181818;" BorderPane.alignment="CENTER">
                     <JFXButton fx:id="btnProfilePage" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Profile" textFill="WHITE">
                         <font>
                             <Font size="16.0" />
@@ -63,7 +63,7 @@
                      <Font size="13.0" />
                   </font>
                     </JFXButton>
-               <JFXButton fx:id="btnAddemp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Add New Emloyee" textFill="WHITE" />
+               <JFXButton fx:id="VboxBtnAddEmp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Add New Emloyee" textFill="WHITE" />
                     <JFXButton fx:id="btnLogout" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Logout" textFill="WHITE">
                         <font>
                             <Font size="16.0" />
@@ -118,33 +118,32 @@
                         </AnchorPane>
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="studentsPage" prefHeight="561.0" prefWidth="765.0" visible="false">
+            <AnchorPane fx:id="PersonnelTablePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                <children>
                   <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@style.css" text="Personnel List" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="studentsTable" layoutX="55.0" layoutY="70.0" prefHeight="446.0" prefWidth="655.0">
+                  <TableView fx:id="PersonnelTable" layoutX="55.0" layoutY="70.0" prefHeight="446.0" prefWidth="506.0">
                      <effect>
                         <DropShadow color="#ad1457" height="55.0" radius="27.0" spread="0.25" width="55.0" />
                      </effect>
                      <columns>
-                        <TableColumn fx:id="clmnNameST" prefWidth="213.0" resizable="false" text="Name" />
-                        <TableColumn fx:id="clmnIdST" prefWidth="212.0" resizable="false" text="ID" />
-                        <TableColumn fx:id="clmnSexST" prefWidth="212.0" resizable="false" />
-                        <TableColumn fx:id="clmnIdST1" prefWidth="212.0" resizable="false" text="ID" />
+                        <TableColumn fx:id="clmnFirstName" prefWidth="178.0" resizable="false" text="First Name" />
+                        <TableColumn fx:id="clmnLastName" prefWidth="166.0" resizable="false" text="Last name" />
+                        <TableColumn fx:id="clmnTitle" prefWidth="161.0" resizable="false" text="Title" />
                      </columns>
                   </TableView>
                </children></AnchorPane>
-            <AnchorPane fx:id="professorsPage1" layoutX="10.0" layoutY="10.0" prefHeight="561.0" prefWidth="765.0">
+            <AnchorPane fx:id="EmpAddPage" layoutX="15.0" layoutY="10.0" prefHeight="551.0" prefWidth="760.0" visible="false">
                <children>
                   <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: #ad1457; -fx-background-radius: 20;" stylesheets="@style.css" text="Add New Employee" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="54.0" layoutY="113.0" prefHeight="336.0" prefWidth="651.0" style="-fx-background-color: #b340aa; -fx-background-radius: 35;">
+                  <AnchorPane layoutX="54.0" layoutY="113.0" prefHeight="280.0" prefWidth="651.0" style="-fx-background-color: #b340aa; -fx-background-radius: 35;">
                      <effect>
                         <DropShadow />
                      </effect>
@@ -159,33 +158,27 @@
                               <DropShadow />
                            </effect>
                         </Label>
-                        <TextField layoutX="195.0" layoutY="186.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-radius: 10;" />
-                        <TextField layoutX="182.0" layoutY="114.0" style="-fx-background-radius: 10;" />
+                        <TextField fx:id="txtOfsprngeEntrnc" layoutX="195.0" layoutY="186.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-radius: 10;" />
+                        <TextField fx:id="txtIDEntrnc" layoutX="182.0" layoutY="114.0" style="-fx-background-radius: 10;" />
                         <Label layoutX="31.0" layoutY="42.0" prefHeight="35.0" prefWidth="45.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Name " textFill="#f2ebeb">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Label>
-                        <Label layoutX="368.0" layoutY="42.0" prefHeight="35.0" prefWidth="78.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Fathers Name" textFill="#f2ebeb">
+                        <Label layoutX="368.0" layoutY="42.0" prefHeight="35.0" prefWidth="78.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Last Name" textFill="#f2ebeb">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Label>
-                        <TextField layoutX="182.0" layoutY="47.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
-                        <TextField layoutX="492.0" layoutY="47.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
-                        <Label layoutX="369.0" layoutY="109.0" prefHeight="35.0" prefWidth="77.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Date Of Birth" textFill="#f2ebeb">
+                        <TextField fx:id="txtNameEntrnc" layoutX="182.0" layoutY="47.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
+                        <TextField fx:id="txtLastNameEntrnc" layoutX="492.0" layoutY="47.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
+                        <Label layoutX="369.0" layoutY="109.0" prefHeight="35.0" prefWidth="38.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Title" textFill="#f2ebeb">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Label>
-                        <TextField layoutX="493.0" layoutY="114.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
-                        <Label layoutX="369.0" layoutY="181.0" prefHeight="35.0" prefWidth="38.0" style="-fx-background-color: #3f4bd1; -fx-background-radius: 20;" text="Title" textFill="#f2ebeb">
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </Label>
-                        <TextField layoutX="493.0" layoutY="186.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
-                        <Button layoutX="473.0" layoutY="262.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="97.0" style="-fx-background-radius: 100; -fx-background-color: #449416;" text="Add">
+                        <TextField fx:id="txtTitlEntrnc" layoutX="493.0" layoutY="114.0" prefHeight="25.0" prefWidth="123.0" style="-fx-background-radius: 10;" />
+                        <Button fx:id="btnAddEmp" layoutX="473.0" layoutY="186.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="97.0" style="-fx-background-radius: 100; -fx-background-color: #449416;" text="Add">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
