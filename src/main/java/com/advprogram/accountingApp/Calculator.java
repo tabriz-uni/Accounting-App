@@ -20,19 +20,29 @@ public class Calculator {
         GData ref = getGData();
         IncreBaseSalary(ref);
     }
+    private void IncreExp() {
+        String sql = "UPDATE employee " +
+                "SET " +
+                "work_exp = work_exp +1," +
+                "work_exp_here = work_exp_here + 1;";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
     private void IncreBaseSalary(GData ref) {
         String sqlH = "UPDATE employee " +
                 "SET " +
                 "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
-                " WHERE work_exp_here < 1";
+                " WHERE work_exp_here >= 1";
         String sqlNH = "UPDATE employee " +
                 "SET " +
-                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
+                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug +
                 " WHERE work_exp_here < 1";
-        /*
-                " WHERE work_exp_here IN " +
-                "(SELECT work_exp_here FROM employee GROUP BY work_exp_here > 12";
-         */
+
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement()){
                  statement.executeUpdate(sqlH);
@@ -45,12 +55,12 @@ public class Calculator {
     private void IncreGlobalData() {
         String sql = "UPDATE global_data "
                 + "SET "
-                + "bon_maskan = bon_maskan * 1.15, "
-                + "bon_nagdi = bon_nagdi * 1.15, "
-                + "hag_olad = hag_olad * 1.15, "
-                + "paye_sanavat = paye_sanavat * 1.15,"
-                + "sabet_hogug = (sabet_hogug * 1.15),"
-                + "base_salary = (base_salary * 20)"
+                + "bon_maskan = bon_maskan * 1.20, "
+                + "bon_nagdi = bon_nagdi * 1.30, "
+                + "hag_olad = hag_olad * 1.20, "
+                + "paye_sanavat = paye_sanavat * 1.20,"
+                + "sabet_hogug = (sabet_hogug * 1.20),"
+                + "base_salary = (base_salary * 1.20)"
                 + "WHERE "
                 + "(SELECT * FROM global_data LIMIT 1)";
 
