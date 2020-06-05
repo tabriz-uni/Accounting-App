@@ -10,12 +10,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.EnumMap;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.spi.CalendarDataProvider;
 
 public class Calculator {
     private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
@@ -59,4 +55,3 @@ public class Calculator {
         return BCrypt.hashpw(pass, BCrypt.gensalt());
     }
 }
-
