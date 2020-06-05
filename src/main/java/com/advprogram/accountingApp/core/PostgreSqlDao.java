@@ -34,8 +34,14 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String pass = resultSet.getString("pass");
+                    int offsprings = resultSet.getInt("offsprings");
+                    String title = resultSet.getString("title");
+                    int workExp = resultSet.getInt("work_exp");
+                    int workExpHere = resultSet.getInt("work_exp_here");
+                    int baseSalary = resultSet.getInt("base_salary");
 
-                    employee = Optional.of(new Employee(id, firstName, lastName, pass));
+                    employee = Optional.of(new Employee(id, firstName, lastName, pass,
+                                offsprings, title, workExp, workExpHere, baseSalary));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
@@ -60,8 +66,14 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String pass = resultSet.getString("pass");
+                    int offsprings = resultSet.getInt("offsprings");
+                    String title = resultSet.getString("title");
+                    int workExp = resultSet.getInt("work_exp");
+                    int workExpHere = resultSet.getInt("work_exp_here");
+                    int baseSalary = resultSet.getInt("base_salary");
 
-                    Employee employee = new Employee(id, firstName, lastName, pass);
+                    Employee employee = new Employee(id, firstName, lastName, pass,
+                              offsprings, title, workExp, workExpHere, baseSalary);
 
                     employees.add(employee);
 
@@ -81,7 +93,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
         String message = "The employee to be added should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "employee(first_name, last_name, pass) "
+                + "employee(first_name, last_name, pass, offsprings, title, work_exp, work_exp_here, base_salary) "
                 + "VALUES(?, ?, ?)";
 
         return connection.flatMap(conn -> {
@@ -254,10 +266,5 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                 throwables.printStackTrace();
             }
         });
-    }
-
-    @Override
-    public Date getDate() {
-
     }
 }

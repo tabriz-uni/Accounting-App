@@ -91,11 +91,12 @@ public class LoginController {
         try {
             Employee customer = getCustomer(Integer.parseInt(user.getText()));
             boolean correct = checkPass(password.getText(), customer.getPass());
-            if (correct)
+            if (correct) {
+                InvalidCrdLbl.setVisible(true);
                 return (customer.getId());
+            }
         } catch (NonExistentEntityException ex) {
             InvalidCrdLbl.setVisible(true);
-            LOGGER.log(Level.WARNING, ex.getMessage());
             return null;
         }
         return null;

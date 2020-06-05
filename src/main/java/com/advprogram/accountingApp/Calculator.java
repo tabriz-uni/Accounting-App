@@ -1,6 +1,7 @@
 package main.java.com.advprogram.accountingApp;
 
 import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.GData;
 import main.java.com.advprogram.accountingApp.api.PasswordGenerator;
 import main.java.com.advprogram.accountingApp.core.JdbcConnection;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
@@ -8,10 +9,13 @@ import main.java.com.advprogram.accountingApp.spi.Dao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.spi.CalendarDataProvider;
 
 public class Calculator {
     private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
@@ -21,15 +25,19 @@ public class Calculator {
 
     public Calculator() { this.connection = JdbcConnection.getConnection(); }
 
+    private void nextMonth() {
+        DAO.nextMonth();
+        GData gData = getGData();
+        LocalDate localDate = gData.getDate().toLocalDate();
+        if (localDate.getMonthValue() == 1)
+            nextYear();
+    }
     public void nextYear() {
         increGlobalData();
         increExp();
         increBaseSalary();
     }
-    private void nextMonth() {
-        DAO.nextMonth();
-        DAO.getGData();
-    }
+    private GData getGData() { return DAO.getGData(); }
     private void increExp() {
         DAO.increExp();
     }

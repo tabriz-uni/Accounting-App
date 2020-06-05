@@ -28,5 +28,4 @@ public interface Dao<T, I> {
 
     void nextMonth();
 
-    Date getDate();
 }
