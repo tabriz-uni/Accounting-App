@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.advprogram.accountingApp.api.Accountant;
 
 import javax.swing.*;
 
@@ -17,9 +18,9 @@ public class AccountantController {
 
     public void initialize() { }
 
-    public void initSessionID(final LoginManager loginManager, String sessionID) {
-        lblName.setText(sessionID.split("@")[0]);
-        lblAccNo.setText(sessionID.split("@")[1]);
+    public void initSessionID(final LoginManager loginManager, Accountant accountant) {
+        lblName.setText(accountant.getFirstName()+" "+accountant.getLastName());
+        lblAccNo.setText(String.valueOf(accountant.getId()));
 
         /* Event handlers for side menu items */
         btnProfilePage.setOnAction(event -> {

@@ -1,13 +1,10 @@
 package main.java.com.advprogram.accountingApp.core;
 
+import main.java.com.advprogram.accountingApp.api.GData;
 import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -45,7 +42,6 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
-
             return employee;
         });
     }
@@ -172,4 +168,96 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
         });
     }
 
+    @Override
+    public GData getGData() {
+        String sqlT = "SELECT * FROM global_data LIMIT 1";
+        GData ref = new GData();
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement();
+                 ResultSet rs = statement.executeQuery(sqlT)) {
+                ref.setBaseSalary(rs.getInt("base_salary"));
+                ref.setBonMaskan(rs.getInt("bon_maskan"));
+                ref.setBonNagdi(rs.getInt("bon_nagdi"));
+                ref.setHagOlad(rs.getInt("hag_olad"));
+                ref.setPayeSanavat(rs.getInt("paye_sanavat"));
+                ref.setSabetHogug(rs.getInt("sabet_hogug"));
+                ref.setDate(rs.getDate("app_date"));
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+        return ref;
+    }
+    @Override
+    public void increExp() {
+        String sql = "UPDATE employee " +
+                "SET " +
+                "work_exp = work_exp +1," +
+                "work_exp_here = work_exp_here + 1;";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
+    @Override
+    public void increBaseSalary() {
+        GData ref = getGData();
+        String sqlH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() + ref.getPayeSanavat() +
+                " WHERE work_exp_here >= 1";
+        String sqlNH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() +
+                " WHERE work_exp_here < 1";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()){
+                statement.executeUpdate(sqlH);
+                statement.executeUpdate(sqlNH);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    @Override
+    public void increGlobalData() {
+        String sql = "UPDATE global_data "
+                + "SET "
+                + "bon_maskan = bon_maskan * 1.20, "
+                + "bon_nagdi = bon_nagdi * 1.30, "
+                + "hag_olad = hag_olad * 1.20, "
+                + "paye_sanavat = paye_sanavat * 1.20,"
+                + "sabet_hogug = (sabet_hogug * 1.20),"
+                + "base_salary = (base_salary * 1.20)";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    @Override
+    public void nextMonth() {
+        String sql = "UPDATE global_data "
+                + "SET "
+                + "app_date = app_date + INTERVAL '1 month'";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public Date getDate() {
+
+    }
 }

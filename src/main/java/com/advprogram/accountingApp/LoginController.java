@@ -4,8 +4,10 @@ import com.jfoenix.controls.JFXSlider;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import main.java.com.advprogram.accountingApp.api.Accountant;
 import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.api.User;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
@@ -25,7 +27,8 @@ public class LoginController {
     @FXML private JFXSlider type;
     @FXML private Label InvalidCrdLbl;
     private String revealedPassword;
-    private final String accountant = "Ali Shams@1@1";
+    private Accountant accountant = new Accountant(1, "Ali", "Shams","1");
+
 
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
     private static final Dao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlDao();
@@ -53,7 +56,7 @@ public class LoginController {
         loginButton.setOnAction(event -> {
             if (type.getValue() == 0)
             {
-                String Info;
+                Accountant Info;
                 Info = authorizeAccountant();
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
@@ -98,8 +101,8 @@ public class LoginController {
         return null;
     }
 
-    private String authorizeAccountant() {
-        if (user.getText().equals(accountant.split("@")[1]) && password.getText().equals(accountant.split("@")[2]))
+    private Accountant authorizeAccountant() {
+        if (user.getText().equals(String.valueOf(accountant.getId())) && password.getText().equals(accountant.getPass()))
             return accountant;
         else
             return null;

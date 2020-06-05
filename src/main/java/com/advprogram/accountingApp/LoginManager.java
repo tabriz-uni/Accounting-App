@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.logging.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import main.java.com.advprogram.accountingApp.api.Accountant;
 import main.java.com.advprogram.accountingApp.api.Employee;
 
 /** Manages control flow for logins */
@@ -21,8 +22,8 @@ public class LoginManager extends Node {
      * Callback method invoked to notify that a user has been authenticated.
      * Will show the main application screen.
      */
-    public void authenticatedAccountant(String sessionID) {
-        showAccountantView(sessionID);
+    public void authenticatedAccountant(Accountant accountant) {
+        showAccountantView(accountant);
     }
 
     public void authenticatedEmployee(Integer sessionID) { showEmployeeView(sessionID); }
@@ -49,7 +50,7 @@ public class LoginManager extends Node {
         }
     }
 
-    private void showAccountantView(String sessionID) {
+    private void showAccountantView(Accountant accountant) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("accountantView.fxml")
@@ -57,7 +58,7 @@ public class LoginManager extends Node {
             scene.setRoot(loader.load());
             AccountantController controller =
                     loader.getController();
-            controller.initSessionID(this, sessionID);
+            controller.initSessionID(this, accountant);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
