@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;"
-                    xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -27,11 +22,6 @@
                             <VBox.margin>
                                 <Insets top="2.0" />
                             </VBox.margin>
-                        </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                            <image>
-                                <Image url="@../../../../res/icons/create-icon.png" />
-                            </image>
                         </ImageView>
                         <ImageView fitHeight="40.0" fitWidth="40.0">
                             <image>
@@ -64,12 +54,7 @@
                             <Font size="16.0" />
                         </font>
                     </JFXButton>
-                    <JFXButton fx:id="btnPresentPage" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Present" textFill="WHITE">
-                        <font>
-                            <Font size="16.0" />
-                        </font>
-                    </JFXButton>
-                    <JFXButton fx:id="btnClassPage" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="My Class" textFill="WHITE">
+                    <JFXButton fx:id="btnPresentPage" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Salary" textFill="WHITE">
                         <font>
                             <Font size="16.0" />
                         </font>
@@ -97,36 +82,47 @@
     <center>
         <AnchorPane fx:id="centerAnchor" styleClass="pane-main" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="765.0">
+            <AnchorPane fx:id="SalaryView" prefHeight="561.0" prefWidth="765.0" />
+                <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                     <children>
-                        <AnchorPane layoutX="110.0" layoutY="73.0" prefHeight="208.0" prefWidth="545.0" style="-fx-background-color: #ad1457; -fx-background-radius: 30;">
+                        <AnchorPane layoutX="110.0" layoutY="73.0" prefHeight="209.0" prefWidth="606.0" style="-fx-background-color: #ad1457; -fx-background-radius: 30;">
                             <children>
-                                <Label layoutX="14.0" layoutY="23.0" prefHeight="41.0" prefWidth="157.0" text="Name :" textFill="#dccbcb">
+                                <Label layoutX="14.0" layoutY="23.0" prefHeight="41.0" prefWidth="102.0" text="First Name :" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="14.0" layoutY="84.0" prefHeight="41.0" prefWidth="157.0" text="Account No. :" textFill="#dccbcb">
+                                <Label layoutX="14.0" layoutY="84.0" prefHeight="41.0" prefWidth="157.0" text="Personnel ID :" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblAccNo" layoutX="241.0" layoutY="84.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                                <Label fx:id="lblAccNo" layoutX="216.0" layoutY="84.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblName" layoutX="241.0" layoutY="23.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                                <Label fx:id="lblName" layoutX="146.0" layoutY="23.0" prefHeight="41.0" prefWidth="139.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                        <Label layoutX="14.0" layoutY="141.0" prefHeight="41.0" prefWidth="157.0" text="Course :" textFill="#dccbcb">
+                        <Label layoutX="14.0" layoutY="141.0" prefHeight="41.0" prefWidth="157.0" text="Title :" textFill="#dccbcb">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblCourseName" layoutX="241.0" layoutY="141.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                        <Label fx:id="lblCourseName" layoutX="216.0" layoutY="141.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="321.0" layoutY="23.0" prefHeight="41.0" prefWidth="102.0" text="Last Name" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblName1" layoutX="453.0" layoutY="23.0" prefHeight="41.0" prefWidth="139.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -136,46 +132,33 @@
                                 <DropShadow color="#4ea3ab" height="55.0" radius="27.0" spread="0.25" width="55.0" />
                             </effect>
                         </AnchorPane>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="classPage" prefHeight="561.0" prefWidth="765.0" visible="false">
-                    <children>
-                        <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@style.css" text="Students List" textFill="WHITE">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
+                  <AnchorPane layoutX="118.0" layoutY="297.0" prefHeight="147.0" prefWidth="431.0" style="-fx-background-color: #ad1457; -fx-background-radius: 70;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="42.0" prefHeight="41.0" prefWidth="153.0" style="-fx-background-radius: 30;" text="Change Password" textFill="#dccbcb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </Label>
-                        <TableView fx:id="studentsTable" layoutX="55.0" layoutY="70.0" prefHeight="446.0" prefWidth="655.0">
-                            <effect>
-                                <DropShadow color="#ad1457" height="55.0" radius="27.0" spread="0.25" width="55.0" />
-                            </effect>
-                            <columns>
-                                <TableColumn fx:id="clmnNameST" prefWidth="318.0" resizable="false" text="Name" />
-                                <TableColumn fx:id="clmnIdST" prefWidth="318.0" resizable="false" text="ID" />
-                            </columns>
-                        </TableView>
-                    </children></AnchorPane>
-                <AnchorPane fx:id="presentPage" prefHeight="561.0" prefWidth="765.0" visible="false">
-                    <children>
-                        <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@style.css" text="Courses List" textFill="WHITE">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <TableView fx:id="coursesTable" layoutX="55.0" layoutY="69.0" prefHeight="423.0" prefWidth="655.0">
-                            <effect>
-                                <DropShadow color="#ad1457" height="55.0" radius="27.0" spread="0.25" width="55.0" />
-                            </effect>
-                            <columns>
-                                <TableColumn fx:id="clmnCourseCT" prefWidth="318.0" resizable="false" text="Course Name" />
-                                <TableColumn fx:id="clmnIdCT" prefWidth="318.0" resizable="false" text="Course ID" />
-                            </columns>
-                        </TableView>
-                  <JFXButton fx:id="btnConfirm" alignment="CENTER" layoutX="616.0" layoutY="498.0" prefHeight="49.0" prefWidth="94.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Confirm" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
+                        <TextField layoutX="171.0" layoutY="50.0" prefHeight="25.0" prefWidth="246.0" />
+                        <JFXButton layoutX="273.0" layoutY="96.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" style="-fx-background-color: #449416; -fx-background-radius: 100;" text="Confirm Change">
+                           <effect>
+                              <DropShadow height="47.69" radius="14.4475" width="12.1">
+                                 <color>
+                                    <Color green="0.39191335439682007" blue="0.9200000166893005" />
+                                 </color>
+                              </DropShadow>
+                           </effect></JFXButton>
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </children>
