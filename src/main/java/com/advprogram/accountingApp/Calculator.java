@@ -1,92 +1,62 @@
 package main.java.com.advprogram.accountingApp;
 
+import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.GData;
+import main.java.com.advprogram.accountingApp.api.PasswordGenerator;
 import main.java.com.advprogram.accountingApp.core.JdbcConnection;
+import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
+import main.java.com.advprogram.accountingApp.spi.Dao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.EnumMap;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.spi.CalendarDataProvider;
 
 public class Calculator {
     private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
+    private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
     private final Optional<Connection> connection;
 
     public Calculator() { this.connection = JdbcConnection.getConnection(); }
 
+    private void nextMonth() {
+        DAO.nextMonth();
+        GData gData = getGData();
+        LocalDate localDate = gData.getDate().toLocalDate();
+        if (localDate.getMonthValue() == 1)
+            nextYear();
+    }
     public void nextYear() {
-        GData refOld = getGData();
-        IncreGlobalData();
-        GData ref = getGData();
-        IncreBaseSalary(ref);
+        increGlobalData();
+        increExp();
+        increBaseSalary();
     }
-    private void IncreBaseSalary(GData ref) {
-        String sqlH = "UPDATE employee " +
-                "SET " +
-                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
-                " WHERE work_exp_here < 1";
-        String sqlNH = "UPDATE employee " +
-                "SET " +
-                "base_salary = (base_salary * 1.5) +" + ref.sabetHogug + ref.payeSanavat +
-                " WHERE work_exp_here < 1";
-        /*
-                " WHERE work_exp_here IN " +
-                "(SELECT work_exp_here FROM employee GROUP BY work_exp_here > 12";
-         */
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement()){
-                 statement.executeUpdate(sqlH);
-                 statement.executeUpdate(sqlNH);
-        } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
+    private GData getGData() { return DAO.getGData(); }
+    private void increExp() {
+        DAO.increExp();
     }
-    private void IncreGlobalData() {
-        String sql = "UPDATE global_data "
-                + "SET "
-                + "bon_maskan = bon_maskan * 1.15, "
-                + "bon_nagdi = bon_nagdi * 1.15, "
-                + "hag_olad = hag_olad * 1.15, "
-                + "paye_sanavat = paye_sanavat * 1.15,"
-                + "sabet_hogug = (sabet_hogug * 1.15),"
-                + "base_salary = (base_salary * 20)"
-                + "WHERE "
-                + "(SELECT * FROM global_data LIMIT 1)";
-
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement()) {
-                statement.executeUpdate(sql);
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
+    private void increBaseSalary() {
+        DAO.increBaseSalary();
     }
-    private GData getGData() {
-        String sqlT = "SELECT * FROM global_data LIMIT 1";
-        GData ref = new GData();
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement();
-                 ResultSet rs = statement.executeQuery(sqlT)) {
-                ref.baseSalary = rs.getInt("base_salary");
-                ref.bonMaskan = rs.getInt("bon_maskan");
-                ref.bonNagdi = rs.getInt("bon_nagdi");
-                ref.hagOlad = rs.getInt("hag_olad");
-                ref.payeSanavat = rs.getInt("paye_sanavat");
-                ref.sabetHogug = rs.getInt("sabet_hogug");
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-        return ref;
+    private void increGlobalData() {
+        DAO.increGlobalData();
+    }
+    private String GeneratePass () {
+        PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
+                .useDigits(true)
+                .useLower(true)
+                .useUpper(true)
+                .build();
+        return passwordGenerator.generate(8);
+    }
+    private String HashPass (String pass) {
+        return BCrypt.hashpw(pass, BCrypt.gensalt());
     }
 }
 
-class GData {
-    int baseSalary;
-    int bonMaskan;
-    int bonNagdi;
-    int hagOlad;
-    int payeSanavat;
-    int sabetHogug;
-}

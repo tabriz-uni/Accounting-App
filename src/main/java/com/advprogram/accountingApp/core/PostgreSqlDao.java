@@ -1,13 +1,10 @@
 package main.java.com.advprogram.accountingApp.core;
 
+import main.java.com.advprogram.accountingApp.api.GData;
 import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -37,15 +34,20 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String pass = resultSet.getString("pass");
+                    int offsprings = resultSet.getInt("offsprings");
+                    String title = resultSet.getString("title");
+                    int workExp = resultSet.getInt("work_exp");
+                    int workExpHere = resultSet.getInt("work_exp_here");
+                    int baseSalary = resultSet.getInt("base_salary");
 
-                    employee = Optional.of(new Employee(id, firstName, lastName, pass));
+                    employee = Optional.of(new Employee(id, firstName, lastName, pass,
+                                offsprings, title, workExp, workExpHere, baseSalary));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
-
             return employee;
         });
     }
@@ -64,8 +66,14 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String pass = resultSet.getString("pass");
+                    int offsprings = resultSet.getInt("offsprings");
+                    String title = resultSet.getString("title");
+                    int workExp = resultSet.getInt("work_exp");
+                    int workExpHere = resultSet.getInt("work_exp_here");
+                    int baseSalary = resultSet.getInt("base_salary");
 
-                    Employee employee = new Employee(id, firstName, lastName, pass);
+                    Employee employee = new Employee(id, firstName, lastName, pass,
+                              offsprings, title, workExp, workExpHere, baseSalary);
 
                     employees.add(employee);
 
@@ -85,7 +93,7 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
         String message = "The employee to be added should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "employee(first_name, last_name, pass) "
+                + "employee(first_name, last_name, pass, offsprings, title, work_exp, work_exp_here, base_salary) "
                 + "VALUES(?, ?, ?)";
 
         return connection.flatMap(conn -> {
@@ -172,4 +180,91 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
         });
     }
 
+    @Override
+    public GData getGData() {
+        String sqlT = "SELECT * FROM global_data LIMIT 1";
+        GData ref = new GData();
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement();
+                 ResultSet rs = statement.executeQuery(sqlT)) {
+                ref.setBaseSalary(rs.getInt("base_salary"));
+                ref.setBonMaskan(rs.getInt("bon_maskan"));
+                ref.setBonNagdi(rs.getInt("bon_nagdi"));
+                ref.setHagOlad(rs.getInt("hag_olad"));
+                ref.setPayeSanavat(rs.getInt("paye_sanavat"));
+                ref.setSabetHogug(rs.getInt("sabet_hogug"));
+                ref.setDate(rs.getDate("app_date"));
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+        return ref;
+    }
+    @Override
+    public void increExp() {
+        String sql = "UPDATE employee " +
+                "SET " +
+                "work_exp = work_exp +1," +
+                "work_exp_here = work_exp_here + 1;";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
+    @Override
+    public void increBaseSalary() {
+        GData ref = getGData();
+        String sqlH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() + ref.getPayeSanavat() +
+                " WHERE work_exp_here >= 1";
+        String sqlNH = "UPDATE employee " +
+                "SET " +
+                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() +
+                " WHERE work_exp_here < 1";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()){
+                statement.executeUpdate(sqlH);
+                statement.executeUpdate(sqlNH);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    @Override
+    public void increGlobalData() {
+        String sql = "UPDATE global_data "
+                + "SET "
+                + "bon_maskan = bon_maskan * 1.20, "
+                + "bon_nagdi = bon_nagdi * 1.30, "
+                + "hag_olad = hag_olad * 1.20, "
+                + "paye_sanavat = paye_sanavat * 1.20,"
+                + "sabet_hogug = (sabet_hogug * 1.20),"
+                + "base_salary = (base_salary * 1.20)";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    @Override
+    public void nextMonth() {
+        String sql = "UPDATE global_data "
+                + "SET "
+                + "app_date = app_date + INTERVAL '1 month'";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
 }

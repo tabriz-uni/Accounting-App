@@ -2,14 +2,19 @@ package main.java.com.advprogram.accountingApp.api;
 
 public class Employee extends User {
 
-    private String title;
     private int offsprings;
     private int workExp;
     private int workExpHere;
     private int baseSalary;
+    private String title;
 
-    public Employee(int id, String firstName, String lastName, String pass) {
+    public Employee(int id, String firstName, String lastName, String pass, int offsprings, String title, int workExp, int workExpHere, int baseSalary) {
         super(id, firstName, lastName, pass);
+        this.offsprings = offsprings;
+        this.title = title;
+        this.workExp = workExp;
+        this.workExpHere = workExpHere;
+        this.baseSalary = baseSalary;
     }
 
     public String getTitle() {
