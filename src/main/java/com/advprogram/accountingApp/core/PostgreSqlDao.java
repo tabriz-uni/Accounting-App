@@ -89,41 +89,34 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
     }
 
     @Override
-    public Optional<Integer> save(Employee employee) {
+    public void save(Employee employee) {
         String message = "The employee to be added should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "employee(first_name, last_name, pass, offsprings, title, work_exp, work_exp_here, base_salary) "
-                + "VALUES(?, ?, ?)";
+                + "employee(employee_id, first_name, last_name, pass, " +
+                "offsprings, title, work_exp, work_exp_here, base_salary) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        return connection.flatMap(conn -> {
-            Optional<Integer> generatedId = Optional.empty();
+        connection.ifPresent(conn -> {
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
-            try (PreparedStatement statement = conn.prepareStatement(sql,
-                    Statement.RETURN_GENERATED_KEYS)) {
-
-                statement.setString(1, nonNullCustomer.getFirstName());
-                statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getPass());
+                statement.setInt(1, nonNullCustomer.getId());
+                statement.setString(2, nonNullCustomer.getFirstName());
+                statement.setString(3, nonNullCustomer.getLastName());
+                statement.setString(4, nonNullCustomer.getPass());
+                statement.setInt(5, nonNullCustomer.getOffsprings());
+                statement.setString(6, nonNullCustomer.getTitle());
+                statement.setInt(7, nonNullCustomer.getWorkExp());
+                statement.setInt(8, nonNullCustomer.getWorkExpHere());
+                statement.setInt(9, nonNullCustomer.getBaseSalary());
 
                 int numberOfInsertedRows = statement.executeUpdate();
-
-                //Retrieve the auto-generated id
-                if (numberOfInsertedRows > 0) {
-                    try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                        if (resultSet.next()) {
-                            generatedId = Optional.of(resultSet.getInt(1));
-                        }
-                    }
-                }
 
                 LOGGER.log(Level.INFO, "{0} created successfully? {1}",
                         new Object[]{nonNullCustomer, numberOfInsertedRows > 0});
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
-
-            return generatedId;
         });
     }
 
@@ -146,6 +139,32 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
                 statement.setString(2, nonNullCustomer.getLastName());
                 statement.setString(3, nonNullCustomer.getPass());
                 statement.setInt(4, nonNullCustomer.getId());
+
+                int numberOfUpdatedRows = statement.executeUpdate();
+
+                LOGGER.log(Level.INFO, "Was the employee updated successfully? {0}",
+                        numberOfUpdatedRows > 0);
+
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    @Override
+    public void updatePass(Employee employee) {
+        Employee nonNullCustomer = Objects.requireNonNull(employee);
+        String sql = "UPDATE employee "
+                + "SET "
+                + "pass = ? "
+                + "WHERE "
+                + "employee_id = ?";
+
+        connection.ifPresent(conn -> {
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+
+                statement.setString(1, nonNullCustomer.getPass());
+                statement.setInt(2, nonNullCustomer.getId());
 
                 int numberOfUpdatedRows = statement.executeUpdate();
 

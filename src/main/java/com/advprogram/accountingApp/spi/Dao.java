@@ -1,5 +1,6 @@
 package main.java.com.advprogram.accountingApp.spi;
 
+import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.api.GData;
 
 import java.sql.Date;
@@ -14,9 +15,11 @@ public interface Dao<T, I> {
 
     GData getGData();
 
-    Optional<I> save(T t);
+    void save(T t);
 
     void update(T t);
+
+    void updatePass(T t);
 
     void delete(T t);
 
