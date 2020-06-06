@@ -23,15 +23,41 @@ public class Calculator {
 
     private void nextMonth() {
         DAO.nextMonth();
-        GData gData = getGData();
-        LocalDate localDate = gData.getDate().toLocalDate();
-        if (localDate.getMonthValue() == 1)
+        if (getmonth() == 1)
             nextYear();
     }
-    public void nextYear() {
+    private void nextYear() {
         increGlobalData();
         increExp();
         increBaseSalary();
+    }
+    private int calcEidi(Employee employee) {
+        if (getmonth() == 12)
+            return employee.getBaseSalary() * 60;
+        else return 0;
+    }
+    private int calcHagBime(Employee employee) {
+        GData gData = getGData();
+        if (getmonth() <= 6)
+            return ((employee.getBaseSalary() * 31) + gData.getBonNagdi() + gData.getBonMaskan()) * 7/100;
+        else
+            return ((employee.getBaseSalary() * 30) + gData.getBonNagdi() + gData.getBonMaskan()) * 7/100;
+    }
+    private int calcHagOlad(Employee employee) {
+        GData gData= getGData();
+        int offsprings = employee.getOffsprings();
+        if (offsprings > 2)
+            offsprings = 2;
+        return gData.getHagOlad() * offsprings;
+    }
+    private int finalSalary(Employee employee) {
+        GData gData= getGData();
+        if (getmonth() <= 6)
+            return (employee.getBaseSalary() * 31) + calcHagOlad(employee) +
+                    gData.getBonNagdi() + gData.getBonMaskan();
+        else
+            return (employee.getBaseSalary() * 30) + calcHagOlad(employee) + gData.getBonNagdi() +
+                    gData.getBonMaskan() + calcEidi(employee) - calcHagBime(employee);
     }
     private GData getGData() { return DAO.getGData(); }
     private void increExp() {
@@ -42,6 +68,10 @@ public class Calculator {
     }
     private void increGlobalData() {
         DAO.increGlobalData();
+    }
+    private int getmonth() {
+        GData gData = getGData();
+        return gData.getDate().toLocalDate().getMonthValue();
     }
     private String GeneratePass () {
         PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()

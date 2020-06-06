@@ -30,5 +30,4 @@ public interface Dao<T, I> {
     void increGlobalData();
 
     void nextMonth();
-
 }
