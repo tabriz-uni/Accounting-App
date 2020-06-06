@@ -22,13 +22,13 @@ import java.util.logging.Logger;
 /** Controls the professor's page */
 public class EmployeeController {
     @FXML
-    private JFXButton btnProfilePage, btnSalaryPage, btnLogout, btnExit, btnConfirmChange;
+    private JFXButton btnProfilePage, btnSalaryPage, btnLogout, btnExit, btnConfirmChange,btnPassChange;
     @FXML
     private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay;
     @FXML
-    private AnchorPane profilePage, SalaryPage;
+    private AnchorPane profilePage, SalaryPage , PasswordChangePage;
     @FXML
-    private TextField txtNewPasswprd;
+    private PasswordField txtCurruntPass, txtNewPass , txtConfirmNewPass;
 
 
     public EmployeeController(Optional<Connection> connection) {
@@ -55,6 +55,8 @@ public class EmployeeController {
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
             SalaryPage.setVisible(false);
+            PasswordChangePage.setVisible(false);
+
 
         });
 
@@ -66,6 +68,18 @@ public class EmployeeController {
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             SalaryPage.setVisible(true);
+            PasswordChangePage.setVisible(false);
+
+        });
+        btnPassChange.setOnAction(event -> {
+            btnProfilePage.setStyle(purple());
+            btnSalaryPage.setStyle(purple());
+
+            btnExit.setStyle(purple());
+            btnLogout.setStyle(purple());
+            profilePage.setVisible(false);
+            SalaryPage.setVisible(false);
+            PasswordChangePage.setVisible(true);
 
         });
 
