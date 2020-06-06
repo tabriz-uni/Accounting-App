@@ -105,19 +105,19 @@ public class AccountantController {
             if (input == 0) loginManager.logout();
         });
 
-//        btnExit.setOnAction(event -> {
-//            btnProfilePage.setStyle(purple());
-//            VboxBtnAddEmp.setStyle(purple());
-//            btnEditEmployee.setStyle(purple());
-//            btnPrsnlInfo.setStyle(purple());
-//
-//            btnLogout.setStyle(purple());
-//            btnExit.setStyle(magenta());
-//            Stage stage = (Stage) btnExit.getScene().getWindow();
-//            int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Log Out",
-//                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//            if (input == 0) stage.close();;
-//        });
+        btnExit.setOnAction(event -> {
+            btnProfilePage.setStyle(purple());
+            VboxBtnAddEmp.setStyle(purple());
+            btnEditEmployee.setStyle(purple());
+            btnPrsnlInfo.setStyle(purple());
+
+            btnLogout.setStyle(purple());
+            btnExit.setStyle(magenta());
+            Stage stage = (Stage) btnExit.getScene().getWindow();
+            int input = JOptionPane.showConfirmDialog(null, "Are you sure?", "Log Out",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (input == 0) stage.close();;
+        });
 ////        End of side menu handlers
 
 //        End
