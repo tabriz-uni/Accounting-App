@@ -46,7 +46,7 @@ public class AccountantController {
             EmpAddPage.setVisible(false);
             EmployeeEditPage.setVisible(false);
             PersonnelTablePage.setVisible(false);
-            confirmPage.setVisible(false);
+
         });
 
         btnPrsnlInfo.setOnAction(event -> {
@@ -60,7 +60,6 @@ public class AccountantController {
             EmpAddPage.setVisible(false);
             EmployeeEditPage.setVisible(false);
             PersonnelTablePage.setVisible(true);
-            confirmPage.setVisible(false);
         });
 
         VboxBtnAddEmp.setOnAction(event -> {
@@ -74,7 +73,7 @@ public class AccountantController {
             EmpAddPage.setVisible(true);
             EmployeeEditPage.setVisible(false);
             PersonnelTablePage.setVisible(false);
-            confirmPage.setVisible(false);
+
         });
 
         btnEditEmployee.setOnAction(event -> {
@@ -88,7 +87,7 @@ public class AccountantController {
             EmpAddPage.setVisible(false);
             EmployeeEditPage.setVisible(true);
             PersonnelTablePage.setVisible(false);
-            confirmPage.setVisible(false);
+
         });
 
 
