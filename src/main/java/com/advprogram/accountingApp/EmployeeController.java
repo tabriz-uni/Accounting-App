@@ -1,9 +1,6 @@
 package main.java.com.advprogram.accountingApp;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +23,7 @@ public class EmployeeController {
     @FXML
     private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay;
     @FXML
-    private AnchorPane profilePage, SalaryPage , PasswordChangePage;
+    private AnchorPane profilePage, salaryPage,passwordChangePage;
     @FXML
     private PasswordField txtCurruntPass, txtNewPass , txtConfirmNewPass;
 
@@ -42,9 +39,8 @@ public class EmployeeController {
 
     private final Optional<Connection> connection;
 
-    public void initSessionID(final LoginManager loginManager, Integer sessionID) {
-        String userId = sessionID.toString();
-        lblIDDisplay.setText(userId);
+    public void initSessionID(final LoginManager loginManager, Integer sessionID) throws NonExistentEntityException {
+        setProfileInfo(getEmployee(sessionID));
 
         /* Event handlers for the side menu items */
         btnProfilePage.setOnAction(event -> {
@@ -54,8 +50,8 @@ public class EmployeeController {
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
-            SalaryPage.setVisible(false);
-            PasswordChangePage.setVisible(false);
+            salaryPage.setVisible(false);
+            passwordChangePage.setVisible(false);
 
 
         });
@@ -67,8 +63,8 @@ public class EmployeeController {
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
-            SalaryPage.setVisible(true);
-            PasswordChangePage.setVisible(false);
+            salaryPage.setVisible(true);
+            passwordChangePage.setVisible(false);
 
         });
         btnPassChange.setOnAction(event -> {
@@ -78,8 +74,8 @@ public class EmployeeController {
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
-            SalaryPage.setVisible(false);
-            PasswordChangePage.setVisible(true);
+            salaryPage.setVisible(false);
+            passwordChangePage.setVisible(true);
 
         });
 
@@ -110,10 +106,16 @@ public class EmployeeController {
 
 //        End
     }
+    private void setProfileInfo(Employee employee) {
+        lblFirstNameDisplay.setText(employee.getFirstName());
+        lblLastNameDisplay.setText(employee.getLastName());
+        lblIDDisplay.setText(String.valueOf(employee.getId()));
+        lblTitleDisplay.setText(employee.getTitle());
+    }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> customer = DAO.get(id);
-        return customer.orElseThrow(NonExistentCustomerException::new);
+        Optional<Employee> employee = DAO.get(id);
+        return employee.orElseThrow(NonExistentCustomerException::new);
     }
 
     private void updatePass(Employee employee) {

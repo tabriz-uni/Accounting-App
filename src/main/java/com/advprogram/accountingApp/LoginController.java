@@ -31,7 +31,7 @@ public class LoginController {
 
 
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
-    private static final Dao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlDao();
+    private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
     public void initialize() { }
     public void initManager(final LoginManager loginManager){
@@ -89,11 +89,12 @@ public class LoginController {
 
     private Integer authorizeEmployee() {
         try {
-            Employee customer = getCustomer(Integer.parseInt(user.getText()));
-            boolean correct = checkPass(password.getText(), customer.getPass());
+            Employee employee = getEmployee(Integer.parseInt(user.getText()));
+            System.out.println(employee.getLastName()+ " : "+ employee.getId());
+            boolean correct = checkPass(password.getText(), employee.getPass());
             if (correct) {
-                InvalidCrdLbl.setVisible(true);
-                return (customer.getId());
+                InvalidCrdLbl.setVisible(false);
+                return (employee.getId());
             }
         } catch (NonExistentEntityException ex) {
             InvalidCrdLbl.setVisible(true);
@@ -116,8 +117,8 @@ public class LoginController {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 
-    private Employee getCustomer(int id) throws NonExistentEntityException {
-        Optional<Employee> customer = CUSTOMER_DAO.get(id);
-        return customer.orElseThrow(NonExistentCustomerException::new);
+    private Employee getEmployee(int id) throws NonExistentEntityException {
+        Optional<Employee> employee = DAO.get(id);
+        return employee.orElseThrow(NonExistentCustomerException::new);
     }
 }
