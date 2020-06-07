@@ -1,21 +1,10 @@
 package main.java.com.advprogram.accountingApp.api;
 
-import main.java.com.advprogram.accountingApp.core.JdbcConnection;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
-import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.*;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 public class Calculator {
-    private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
     private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
-
-    private final Optional<Connection> connection;
-
-    public Calculator() { this.connection = JdbcConnection.getConnection(); }
 
     private void nextMonth() {
         DAO.nextMonth();
@@ -46,14 +35,17 @@ public class Calculator {
             offsprings = 2;
         return gData.getHagOlad() * offsprings;
     }
-    private int finalSalary(Employee employee) {
+    private int sumSalary(Employee employee) {
         GData gData= getGData();
         if (getmonth() <= 6)
             return (employee.getBaseSalary() * 31) + calcHagOlad(employee) +
                     gData.getBonNagdi() + gData.getBonMaskan();
+        else if (6 <= getmonth() && getmonth() <= 11)
+            return (employee.getBaseSalary() * 30) + calcHagOlad(employee) +
+                    gData.getBonNagdi() + gData.getBonMaskan();
         else
-            return (employee.getBaseSalary() * 30) + calcHagOlad(employee) + gData.getBonNagdi() +
-                    gData.getBonMaskan() + calcEidi(employee) - calcHagBime(employee);
+            return (employee.getBaseSalary() * 30) + calcHagOlad(employee) +
+                    gData.getBonNagdi() + gData.getBonMaskan() + calcEidi(employee);
     }
 
     private  int calcTax(Employee employee) {
@@ -61,8 +53,8 @@ public class Calculator {
         Employee employee2 = new Employee();
         employee2.setBaseSalary(gData.baseSalary);
         employee2.setOffsprings(2);
-        int finalSal = finalSalary(employee);
-        int taxFreeAllowance = finalSalary(employee2);
+        int finalSal = sumSalary(employee);
+        int taxFreeAllowance = sumSalary(employee2);
         int secSal = taxFreeAllowance + taxFreeAllowance * 35/100;
         int thirdSal = secSal + secSal * 65/100;
         int fourthSal = thirdSal + thirdSal * 60/100;
@@ -99,16 +91,5 @@ public class Calculator {
     private int getmonth() {
         GData gData = getGData();
         return gData.getDate().toLocalDate().getMonthValue();
-    }
-    private String GeneratePass () {
-        PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
-                .useDigits(true)
-                .useLower(true)
-                .useUpper(true)
-                .build();
-        return passwordGenerator.generate(8);
-    }
-    private String HashPass (String pass) {
-        return BCrypt.hashpw(pass, BCrypt.gensalt());
     }
 }
