@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.com.advprogram.accountingApp.api.Accountant;
@@ -40,19 +41,21 @@ public class AccountantController {
             txtIdSearch, txtTitleEdit, txtSalaryEdit, txtOffspringsEdit;
     @FXML
     private Button btnAddEmp;
+
     final ObservableList<EmployeeT> dataET =
             FXCollections.observableArrayList();
+
     private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
     public void initialize() { }
 
     public void initSessionID(final LoginManager loginManager, Accountant accountant) {
-
         setProfileInfo(accountant);
 
         btnSearchID.setOnAction(event -> {
+            Employee employee = new Employee();
             try {
-                Employee employee = getEmployee(Integer.parseInt(txtIdSearch.getText()));
+                employee = getEmployee(Integer.parseInt(txtIdSearch.getText()));
                 lblNameDisplay.setText(employee.getFirstName() + " " + employee.getLastName());
                 txtTitleEdit.setText(employee.getTitle());
                 txtSalaryEdit.setText(String.valueOf(employee.getBaseSalary()));
@@ -60,7 +63,20 @@ public class AccountantController {
             } catch (NonExistentEntityException e) {
                 //TODO
             }
+            Employee finalEmployee = employee;
+            btnSubmitChanges.setOnAction(eventSec -> {
+                if (txtTitleEdit.getText() == null || txtSalaryEdit.getText() == null ||
+                        txtOffspringsEdit == null) {
+                    //TODO
+                    return;
+                }
+                finalEmployee.setTitle(txtTitleEdit.getText());
+                finalEmployee.setOffsprings(Integer.parseInt(txtOffspringsEdit.getText()));
+                finalEmployee.setBaseSalary(Integer.parseInt(txtSalaryEdit.getText()));
+                updateEmployee(finalEmployee);
+            });
         });
+
 
         btnAddEmp.setOnAction(event -> {
             Employee employee = new Employee();
@@ -166,27 +182,18 @@ public class AccountantController {
         });
 ////        End of side menu handlers
 
+        getAllEmployees().forEach(
+                i -> dataET.add(new EmployeeT(i.getFirstName(), i.getLastName(), i.getId(),i.getTitle())));
+        clmnFirstName.setCellValueFactory(
+                new PropertyValueFactory<>("fName"));
+        clmnLastName.setCellValueFactory(
+                new PropertyValueFactory<>("lName"));
+        clmnID.setCellValueFactory(
+                new PropertyValueFactory<>("id"));
+        clmnTitle.setCellValueFactory(
+                new PropertyValueFactory<>("title"));
+        personnelTable.setItems(dataET);
 //        End
-    }
-    public static class EmployeeT {
-        private final SimpleIntegerProperty id;
-        private final SimpleStringProperty name;
-        private EmployeeT(int idT, String fNameT, String lNameT, String titleT) {
-            this.name = new SimpleStringProperty(fNameT);
-            this.id = new SimpleIntegerProperty(idT);
-        }
-        public Integer getId() {
-            return id.get();
-        }
-        public void setId(Integer idT) {
-            id.set(idT);
-        }
-        public String getName() {
-            return name.get();
-        }
-        public void setName(String fNameT) {
-            name.set(fNameT);
-        }
     }
     private void setProfileInfo(Accountant accountant) {
         lblProfName.setText(accountant.getFirstName()+" "+accountant.getLastName());
@@ -197,6 +204,9 @@ public class AccountantController {
         Optional<Employee> employee = DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
+    private void updateEmployee(Employee employee) {
+        DAO.update(employee);
+    }
 
     public static Collection<Employee> getAllEmployees() {
         return DAO.getAll();
@@ -206,6 +216,41 @@ public class AccountantController {
     }
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
+    public static class EmployeeT {
+        private final SimpleStringProperty fName;
+        private final SimpleStringProperty lName;
+        private final SimpleIntegerProperty id;
+        private final SimpleStringProperty title;
+        private EmployeeT(String fNameT, String lNameT, int idT, String titleT) {
+            this.fName = new SimpleStringProperty(fNameT);
+            this.lName = new SimpleStringProperty(lNameT);
+            this.id = new SimpleIntegerProperty(idT);
+            this.title = new SimpleStringProperty(titleT);
+        }
+        public Integer getId() {
+            return id.get();
+        }
+        public void setId(Integer idT) {
+            id.set(idT);
+        }
+        public String getFName() { return fName.get(); }
+        public void setFName(String fNameT) {
+            fName.set(fNameT);
+        }
+        public String getLName() {
+            return lName.get();
+        }
+        public void setLName(String lNameT) {
+            lName.set(lNameT);
+        }
+        public String getTitle() {
+            return title.get();
+        }
+        public void setTitle(String titleT) {
+            title.set(titleT);
+        }
     }
 
     private String purple() {
