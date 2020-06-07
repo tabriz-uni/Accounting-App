@@ -31,7 +31,7 @@ public class AccountantController {
     @FXML
     private TableColumn clmnFirstName, clmnLastName, clmnID;
     @FXML
-    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd;
+    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd, txtWorkExpAdd;
     @FXML
     private Button btnAddEmp;
     final ObservableList<EmployeeT> dataET =
