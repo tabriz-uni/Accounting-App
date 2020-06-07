@@ -150,7 +150,7 @@
                      </columns>
                   </TableView>
                </children></AnchorPane>
-            <AnchorPane fx:id="empAddPage" layoutX="15.0" layoutY="10.0" prefHeight="551.0" prefWidth="760.0" visible="false">
+            <AnchorPane fx:id="empAddPage" layoutX="15.0" layoutY="10.0" prefHeight="551.0" prefWidth="760.0">
                <children>
                   <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: #97117A; -fx-background-radius: 20;" stylesheets="@style.css" text="Add New Employee" textAlignment="RIGHT" textFill="WHITE">
                      <font>
@@ -182,11 +182,48 @@
                         </Button>
                         <Label layoutX="359.0" layoutY="181.0" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #97117A; -fx-background-radius: 20;" text="  Base Salary" textFill="#f2ebeb" />
                         <TextField fx:id="txtBaseSalaryAdd" layoutX="494.0" layoutY="186.0" prefHeight="25.0" prefWidth="121.0" style="-fx-background-radius: 10;" />
+                         <Label layoutX="36.0" layoutY="249.0" prefHeight="35.0" prefWidth="111.0" style="-fx-background-color: #97117A; -fx-background-radius: 100;" text="  Work experience" textFill="WHITE" />
+                         <TextField fx:id="txtWorkExpAdd" layoutX="183.0" layoutY="254.0" prefHeight="25.0" prefWidth="48.0" style="-fx-background-radius: 10;" />
+                         <Label layoutX="177.0" layoutY="77.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="488.0" layoutY="77.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="177.0" layoutY="144.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="183.0" layoutY="216.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="183.0" layoutY="285.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="494.0" layoutY="144.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
+                         <Label layoutX="494.0" layoutY="216.0" prefHeight="15.0" prefWidth="161.0" text="This field cannot be empity" textFill="#c92222" visible="false">
+                             <font>
+                                 <Font name="Arial Bold" size="12.0" />
+                             </font>
+                         </Label>
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="employeeEditPage" layoutX="6.0" layoutY="5.0" prefHeight="554.0" prefWidth="765.0">
+            <AnchorPane fx:id="employeeEditPage" layoutX="6.0" layoutY="5.0" prefHeight="554.0" prefWidth="765.0" visible="false">
                <children>
                   <AnchorPane layoutX="190.0" layoutY="185.0" prefHeight="324.0" prefWidth="385.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
                      <children>

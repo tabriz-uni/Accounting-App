@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 import main.java.com.advprogram.accountingApp.api.Accountant;
 import main.java.com.advprogram.accountingApp.api.Employee;
 import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.api.PasswordGenerator;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.util.Collection;
@@ -34,7 +36,7 @@ public class AccountantController {
     @FXML
     private TableColumn clmnFirstName, clmnLastName, clmnID, clmnTitle;
     @FXML
-    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd,
+    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd, txtWorkExpAdd,
             txtIdSearch, txtTitleEdit, txtSalaryEdit, txtOffspringsEdit;
     @FXML
     private Button btnAddEmp;
@@ -65,12 +67,18 @@ public class AccountantController {
             employee.setId(Integer.parseInt(txtIDAdd.getText()));
             employee.setFirstName(txtFNameAdd.getText());
             employee.setLastName(txtLNameAdd.getText());
-//            employee.setPass();
             employee.setOffsprings(Integer.parseInt(txtOffspringAdd.getText()));
             employee.setTitle(txtTitleAdd.getText());
             employee.setBaseSalary(Integer.parseInt(txtBaseSalaryAdd.getText()));
-//            employee.setWorkExp();
-//            addEmployee(employee);
+            employee.setWorkExp(Integer.parseInt(txtWorkExpAdd.getText()));
+            PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
+                    .useDigits(true)
+                    .useLower(true)
+                    .useUpper(true)
+                    .build();
+            String password = passwordGenerator.generate(8);
+            employee.setPass(hashPassword(password));
+            addEmployee(employee);
         });
 
         /* Event handlers for side menu items */
@@ -195,6 +203,9 @@ public class AccountantController {
     }
     private void addEmployee(Employee employee) {
         DAO.save(employee);
+    }
+    private String hashPassword(String plainTextPassword){
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
     private String purple() {
