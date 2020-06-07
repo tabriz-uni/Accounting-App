@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.AccountantController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;"
+            xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.java.com.advprogram.accountingApp.AccountantController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -68,7 +71,7 @@
                      <Font size="13.0" />
                   </font>
                     </JFXButton>
-               <JFXButton fx:id="VboxBtnAddEmp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Add New Emloyee" textFill="WHITE" />
+               <JFXButton fx:id="vboxBtnAddEmp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Add New Emloyee" textFill="WHITE" />
                <JFXButton fx:id="btnEditEmployee" alignment="CENTER" layoutX="10.0" layoutY="179.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Edit Employee" textFill="WHITE" />
                     <JFXButton fx:id="btnLogout" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Logout" textFill="WHITE">
                         <font>
@@ -124,7 +127,7 @@
                         </AnchorPane>
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="PersonnelTablePage" prefHeight="561.0" prefWidth="765.0" visible="false">
+            <AnchorPane fx:id="personnelTablePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                <children>
                   <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@style.css" text="Personnel List" textFill="WHITE">
                      <font>
@@ -142,7 +145,7 @@
                      </columns>
                   </TableView>
                </children></AnchorPane>
-            <AnchorPane fx:id="EmpAddPage" layoutX="15.0" layoutY="10.0" prefHeight="551.0" prefWidth="760.0" visible="false">
+            <AnchorPane fx:id="empAddPage" layoutX="15.0" layoutY="10.0" prefHeight="551.0" prefWidth="760.0" visible="false">
                <children>
                   <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: #97117A; -fx-background-radius: 20;" stylesheets="@style.css" text="Add New Employee" textAlignment="RIGHT" textFill="WHITE">
                      <font>
@@ -178,7 +181,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="EmployeeEditPage" layoutX="6.0" layoutY="5.0" prefHeight="554.0" prefWidth="765.0">
+            <AnchorPane fx:id="employeeEditPage" layoutX="6.0" layoutY="5.0" prefHeight="554.0" prefWidth="765.0">
                <children>
                   <AnchorPane layoutX="72.0" layoutY="174.0" prefHeight="324.0" prefWidth="385.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
                      <children>

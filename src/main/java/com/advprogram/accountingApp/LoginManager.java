@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import main.java.com.advprogram.accountingApp.api.Accountant;
 import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
 
 /** Manages control flow for logins */
 public class LoginManager extends Node {
@@ -73,7 +74,7 @@ public class LoginManager extends Node {
             EmployeeController controller =
                     loader.getController();
             controller.initSessionID(this, sessionID);
-        } catch (IOException ex) {
+        } catch (IOException | NonExistentEntityException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
