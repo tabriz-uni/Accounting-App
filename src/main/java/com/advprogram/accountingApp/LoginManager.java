@@ -62,7 +62,6 @@ public class LoginManager extends Node {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     private void showEmployeeView(Employee employee) {
         try {
             FXMLLoader loader = new FXMLLoader(

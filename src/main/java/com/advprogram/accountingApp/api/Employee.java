@@ -17,6 +17,10 @@ public class Employee extends User {
         this.baseSalary = baseSalary;
     }
 
+    public Employee() {
+        super();
+    }
+
     public String getTitle() {
         return title;
     }
