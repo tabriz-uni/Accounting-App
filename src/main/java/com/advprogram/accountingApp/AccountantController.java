@@ -11,11 +11,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.com.advprogram.accountingApp.api.Accountant;
 import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 
 import javax.swing.*;
 import java.util.Collection;
+import java.util.Optional;
 
 /** Controls the accountant screen */
 public class AccountantController {
@@ -23,15 +26,16 @@ public class AccountantController {
     private JFXButton btnProfilePage, vboxBtnAddEmp, btnEditEmployee,
             btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID;
     @FXML
-    private Label lblName, lblAccNo;
+    private Label lblProfName, lblAccNo, lblNameDisplay;
     @FXML
-    private AnchorPane profilePage, personnelTablePage, empAddPage, employeeEditPage, confirmPage;
+    private AnchorPane profilePage, personnelTablePage, empAddPage, employeeEditPage;
     @FXML
     private TableView<EmployeeT> personnelTable;
     @FXML
-    private TableColumn clmnFirstName, clmnLastName, clmnID;
+    private TableColumn clmnFirstName, clmnLastName, clmnID, clmnTitle;
     @FXML
-    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd;
+    private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd,
+            txtIdSearch, txtTitleEdit, txtSalaryEdit, txtOffspringsEdit;
     @FXML
     private Button btnAddEmp;
     final ObservableList<EmployeeT> dataET =
@@ -41,6 +45,33 @@ public class AccountantController {
     public void initialize() { }
 
     public void initSessionID(final LoginManager loginManager, Accountant accountant) {
+
+        setProfileInfo(accountant);
+
+        btnSearchID.setOnAction(event -> {
+            try {
+                Employee employee = getEmployee(Integer.parseInt(txtIdSearch.getText()));
+                lblNameDisplay.setText(employee.getFirstName() + " " + employee.getLastName());
+                txtTitleEdit.setText(employee.getTitle());
+                txtSalaryEdit.setText(String.valueOf(employee.getBaseSalary()));
+                txtOffspringsEdit.setText(String.valueOf(employee.getOffsprings()));
+            } catch (NonExistentEntityException e) {
+                //TODO
+            }
+        });
+
+        btnAddEmp.setOnAction(event -> {
+            Employee employee = new Employee();
+            employee.setId(Integer.parseInt(txtIDAdd.getText()));
+            employee.setFirstName(txtFNameAdd.getText());
+            employee.setLastName(txtLNameAdd.getText());
+//            employee.setPass();
+            employee.setOffsprings(Integer.parseInt(txtOffspringAdd.getText()));
+            employee.setTitle(txtTitleAdd.getText());
+            employee.setBaseSalary(Integer.parseInt(txtBaseSalaryAdd.getText()));
+//            employee.setWorkExp();
+//            addEmployee(employee);
+        });
 
         /* Event handlers for side menu items */
         btnProfilePage.setOnAction(event -> {
@@ -148,11 +179,22 @@ public class AccountantController {
         public void setName(String fNameT) {
             name.set(fNameT);
         }
+    }
+    private void setProfileInfo(Accountant accountant) {
+        lblProfName.setText(accountant.getFirstName()+" "+accountant.getLastName());
+        lblAccNo.setText(String.valueOf(accountant.getId()));
+    }
 
+    private Employee getEmployee(int id) throws NonExistentEntityException {
+        Optional<Employee> employee = DAO.get(id);
+        return employee.orElseThrow(NonExistentCustomerException::new);
     }
 
     public static Collection<Employee> getAllEmployees() {
         return DAO.getAll();
+    }
+    private void addEmployee(Employee employee) {
+        DAO.save(employee);
     }
 
     private String purple() {

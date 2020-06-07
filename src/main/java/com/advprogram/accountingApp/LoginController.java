@@ -29,7 +29,6 @@ public class LoginController {
     private String revealedPassword;
     private Accountant accountant = new Accountant(1, "Ali", "Shams","1");
 
-
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
     private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
@@ -90,7 +89,6 @@ public class LoginController {
     private Employee authorizeEmployee() {
         try {
             Employee employee = getEmployee(Integer.parseInt(user.getText()));
-            System.out.println(employee.getLastName()+ " : "+ employee.getId());
             boolean correct = checkPass(password.getText(), employee.getPass());
             if (correct) {
                 InvalidCrdLbl.setVisible(false);

@@ -12,10 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;"
-            xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -98,7 +95,7 @@
     <center>
         <AnchorPane fx:id="centerAnchor" styleClass="pane-main" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
-            <AnchorPane fx:id="SalaryView" prefHeight="561.0" prefWidth="765.0" />
+            <AnchorPane fx:id="salaryPage" prefHeight="561.0" prefWidth="765.0" />
                 <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                     <children>
                         <AnchorPane layoutX="55.0" layoutY="72.0" prefHeight="209.0" prefWidth="655.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
@@ -150,7 +147,7 @@
                         </AnchorPane>
                     </children>
                 </AnchorPane>
-            <AnchorPane fx:id="PaswordChangePage" prefHeight="561.0" prefWidth="766.0" visible="false">
+            <AnchorPane fx:id="passChangePage" prefHeight="561.0" prefWidth="766.0" visible="false">
                <children>
                   <AnchorPane layoutX="114.0" layoutY="123.0" prefHeight="315.0" prefWidth="539.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
                      <children>

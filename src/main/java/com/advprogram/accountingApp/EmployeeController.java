@@ -10,6 +10,7 @@ import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class EmployeeController {
     @FXML
     private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay;
     @FXML
-    private AnchorPane profilePage, salaryPage,passwordChangePage;
+    private AnchorPane profilePage, salaryPage,passChangePage;
     @FXML
     private PasswordField txtCurruntPass, txtNewPass , txtConfirmNewPass;
 
@@ -31,8 +32,25 @@ public class EmployeeController {
 
     private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
-    public void initSessionID(final LoginManager loginManager, Employee sessionID) {
+    public void initSessionID(final LoginManager loginManager, Employee employee) {
+        setProfileInfo(employee);
+        btnConfirmChange.setOnAction(event -> {
+            if (!txtNewPass.getText().equals(txtConfirmNewPass.getText())) {
+                //TODO
+                //new pass n match
+                return;
+            }
+            if (!checkPass(txtCurruntPass.getText(), employee.getPass())) {
+                //TODO
+                return;
+            }
+            if (txtCurruntPass.getText().equals(txtNewPass.getText())) {
+                //TODO
+                return;
+            }
+            updatePass(employee, txtNewPass.getText());
 
+        });
         /* Event handlers for the side menu items */
         btnProfilePage.setOnAction(event -> {
             btnProfilePage.setStyle(magenta());
@@ -42,8 +60,7 @@ public class EmployeeController {
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
             salaryPage.setVisible(false);
-            passwordChangePage.setVisible(false);
-
+            passChangePage.setVisible(false);
 
         });
 
@@ -55,7 +72,7 @@ public class EmployeeController {
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             salaryPage.setVisible(true);
-            passwordChangePage.setVisible(false);
+            passChangePage.setVisible(false);
 
         });
         btnPassChange.setOnAction(event -> {
@@ -66,7 +83,7 @@ public class EmployeeController {
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             salaryPage.setVisible(false);
-            passwordChangePage.setVisible(true);
+            passChangePage.setVisible(true);
 
         });
 
@@ -109,7 +126,14 @@ public class EmployeeController {
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
 
-    private void updatePass(Employee employee) {
+    private String hashPassword(String plainTextPassword){
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+    private boolean checkPass(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
+    private void updatePass(Employee employee, String plainPassword) {
+        employee.setPass(hashPassword(plainPassword));
         DAO.updatePass(employee);
     }
 
