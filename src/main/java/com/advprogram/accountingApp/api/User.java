@@ -13,6 +13,8 @@ public class User {
         this.pass = pass;
     }
 
+    public User() { }
+
     public int getId() {
         return id;
     }
