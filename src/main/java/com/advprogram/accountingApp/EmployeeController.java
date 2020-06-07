@@ -22,7 +22,14 @@ public class EmployeeController {
     @FXML
     private JFXButton btnProfilePage, btnSalaryPage, btnLogout, btnExit, btnConfirmChange,btnPassChange;
     @FXML
-    private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay;
+    private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay,
+            lblRentrebate,
+    lblmonetaryrebate,
+            lblChildbenefit,
+    lblYOSA,
+            lblRegularpay,
+    lblBasesalary,
+            lblSalarySum;
     @FXML
     private AnchorPane profilePage, salaryPage,passChangePage;
     @FXML
