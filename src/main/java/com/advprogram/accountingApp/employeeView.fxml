@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -95,7 +91,74 @@
     <center>
         <AnchorPane fx:id="centerAnchor" styleClass="pane-main" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
-            <AnchorPane fx:id="salaryPage" prefHeight="561.0" prefWidth="765.0" />
+            <AnchorPane fx:id="salaryPage" prefHeight="561.0" prefWidth="765.0">
+               <children>
+                  <AnchorPane layoutX="214.0" layoutY="22.0" prefHeight="341.0" prefWidth="345.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <Label layoutX="14.0" layoutY="26.0" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Rent rebate" />
+                        <Label layoutX="14.0" layoutY="76.0" prefHeight="39.0" prefWidth="108.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Monetary rebate" />
+                        <Label layoutX="14.0" layoutY="122.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Child benefit" />
+                        <Label layoutX="14.0" layoutY="172.0" prefHeight="39.0" prefWidth="157.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Years of Service Allawance" />
+                        <Label layoutX="14.0" layoutY="220.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Regular pay" />
+                        <Label layoutX="14.0" layoutY="269.0" prefHeight="39.0" prefWidth="80.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Base salary" />
+                        <Label fx:id="lblRentrebate" layoutX="216.0" layoutY="31.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblmonetaryrebate" layoutX="216.0" layoutY="81.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblChildbenefit" layoutX="216.0" layoutY="127.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblYOSA" layoutX="216.0" layoutY="177.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblRegularpay" layoutX="216.0" layoutY="225.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblBasesalary" layoutX="216.0" layoutY="274.0" prefHeight="29.0" prefWidth="136.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="204.0" layoutY="360.0" prefHeight="109.0" prefWidth="372.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="74.0" style="-fx-background-color: #97117A; -fx-background-radius: 30;" text="  Sum :">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="291.0" layoutY="64.0" prefHeight="29.0" prefWidth="56.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="Toman" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblSalarySum" layoutX="113.0" layoutY="64.0" prefHeight="29.0" prefWidth="169.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;" text="0" textFill="#221247">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+               </children></AnchorPane>
                 <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                     <children>
                         <AnchorPane layoutX="55.0" layoutY="72.0" prefHeight="209.0" prefWidth="655.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
