@@ -23,15 +23,7 @@ public class AccountantController {
     private JFXButton btnProfilePage, vboxBtnAddEmp, btnEditEmployee,
             btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID;
     @FXML
-    private Label lblName, lblAccNo,
-    emptyfeildFN,
-            emptyfeildLN,
-    emptyfeildNI,
-            emptyfeildNOO,
-    emptyfeildWE,
-            emptyfeildT,
-    emptyfeildBS,
-            empexstswarning  ;
+    private Label lblName, lblAccNo;
     @FXML
     private AnchorPane profilePage, personnelTablePage, empAddPage, employeeEditPage, confirmPage;
     @FXML
