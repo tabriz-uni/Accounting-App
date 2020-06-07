@@ -1,8 +1,6 @@
 package main.java.com.advprogram.accountingApp;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -27,7 +25,7 @@ public class LoginManager extends Node {
         showAccountantView(accountant);
     }
 
-    public void authenticatedEmployee(Integer sessionID) { showEmployeeView(sessionID); }
+    public void authenticatedEmployee(Employee sessionID) { showEmployeeView(sessionID); }
 
     /**
      * Callback method invoked to notify that a user has logged out of the main application.
@@ -65,7 +63,7 @@ public class LoginManager extends Node {
         }
     }
 
-    private void showEmployeeView(Integer sessionID) {
+    private void showEmployeeView(Employee employee) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("employeeView.fxml")
@@ -73,8 +71,8 @@ public class LoginManager extends Node {
             scene.setRoot(loader.load());
             EmployeeController controller =
                     loader.getController();
-            controller.initSessionID(this, sessionID);
-        } catch (IOException | NonExistentEntityException ex) {
+            controller.initSessionID(this, employee);
+        } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
