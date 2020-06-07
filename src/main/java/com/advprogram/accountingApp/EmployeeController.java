@@ -28,7 +28,7 @@ public class EmployeeController {
             lblRentrebate,
     lblmonetaryrebate,
             lblChildbenefit,
-    lblYOSA,
+    lblYOSA, lblTax, lblInsurance,
             lblRegularpay,
     lblBasesalary,
             lblSalarySum;
