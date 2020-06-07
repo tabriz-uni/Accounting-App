@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.advprogram.accountingApp.api.Calculator;
 import main.java.com.advprogram.accountingApp.api.Employee;
+import main.java.com.advprogram.accountingApp.api.GData;
 import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
@@ -41,6 +43,7 @@ public class EmployeeController {
 
     public void initSessionID(final LoginManager loginManager, Employee employee) {
         setProfileInfo(employee);
+        setSalaryInfo(employee);
         btnConfirmChange.setOnAction(event -> {
             if (!txtNewPass.getText().equals(txtConfirmNewPass.getText())) {
                 //TODO
@@ -127,6 +130,15 @@ public class EmployeeController {
         lblIDDisplay.setText(String.valueOf(employee.getId()));
         lblTitleDisplay.setText(employee.getTitle());
     }
+    private void setSalaryInfo(Employee employee) {
+        Calculator calc = new Calculator();
+        GData gData = getGData();
+        lblRentrebate.setText(String.valueOf(gData.getBonMaskan()));
+        lblmonetaryrebate.setText(String.valueOf(gData.getBonNagdi()));
+        lblChildbenefit.setText(String.valueOf(calc.calcHagOlad(employee)));
+        lblBasesalary.setText(String.valueOf(employee.getBaseSalary()));
+        lblSalarySum.setText(String.valueOf(calc.calcPostTaxSal(employee)));
+    }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
         Optional<Employee> employee = DAO.get(id);
@@ -143,6 +155,7 @@ public class EmployeeController {
         employee.setPass(hashPassword(plainPassword));
         DAO.updatePass(employee);
     }
+    private GData getGData() { return DAO.getGData(); }
 
     private String purple() {
         return "-fx-background-color: #673ab7; -fx-background-radius: 70";
