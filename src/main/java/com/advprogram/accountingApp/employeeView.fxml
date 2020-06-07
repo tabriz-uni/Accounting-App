@@ -13,8 +13,8 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="main.java.com.advprogram.accountingApp.EmployeeController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">

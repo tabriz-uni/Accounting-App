@@ -27,20 +27,11 @@ public class EmployeeController {
     @FXML
     private PasswordField txtCurruntPass, txtNewPass , txtConfirmNewPass;
 
-
-    public EmployeeController(Optional<Connection> connection) {
-        this.connection = connection;
-    }
-
     public void initialize() { }
 
-    private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
     private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
 
-    private final Optional<Connection> connection;
-
-    public void initSessionID(final LoginManager loginManager, Integer sessionID) throws NonExistentEntityException {
-        setProfileInfo(getEmployee(sessionID));
+    public void initSessionID(final LoginManager loginManager, Employee sessionID) {
 
         /* Event handlers for the side menu items */
         btnProfilePage.setOnAction(event -> {

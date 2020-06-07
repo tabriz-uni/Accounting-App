@@ -68,7 +68,7 @@ public class LoginController {
 
             else if (type.getValue() == 1)
             {
-                Integer Info;
+                Employee Info;
                 Info = authorizeEmployee();
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
@@ -87,14 +87,14 @@ public class LoginController {
      * otherwise, return null.
      */
 
-    private Integer authorizeEmployee() {
+    private Employee authorizeEmployee() {
         try {
             Employee employee = getEmployee(Integer.parseInt(user.getText()));
             System.out.println(employee.getLastName()+ " : "+ employee.getId());
             boolean correct = checkPass(password.getText(), employee.getPass());
             if (correct) {
                 InvalidCrdLbl.setVisible(false);
-                return (employee.getId());
+                return employee;
             }
         } catch (NonExistentEntityException ex) {
             InvalidCrdLbl.setVisible(true);
