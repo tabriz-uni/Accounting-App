@@ -201,11 +201,12 @@ public class PostgreSqlDao implements Dao<Employee, Integer> {
 
     @Override
     public GData getGData() {
-        String sqlT = "SELECT * FROM global_data LIMIT 1";
+        String sql = "SELECT * FROM global_data LIMIT 1";
         GData ref = new GData();
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement();
-                 ResultSet rs = statement.executeQuery(sqlT)) {
+                 ResultSet rs = statement.executeQuery(sql)) {
+                rs.next();
                 ref.setBaseSalary(rs.getInt("base_salary"));
                 ref.setBonMaskan(rs.getInt("bon_maskan"));
                 ref.setBonNagdi(rs.getInt("bon_nagdi"));

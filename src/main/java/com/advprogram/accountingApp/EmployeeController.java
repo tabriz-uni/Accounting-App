@@ -25,8 +25,8 @@ public class EmployeeController {
     private JFXButton btnProfilePage, btnSalaryPage, btnLogout, btnExit, btnConfirmChange,btnPassChange;
     @FXML
     private Label lblFirstNameDisplay, lblLastNameDisplay, lblTitleDisplay, lblIDDisplay,
-            lblRentrebate, lblmonetaryrebate, lblChildbenefit, lblTax,
-            lblInsurance, lblannualbonus, lblSum, lblBasesalary, lblSalarySum;
+            lblRentRebate, lblMonetaryRebate, lblChildbenefit, lblTax,
+            lblInsurance, lblReward, lblSum, lblBaseSalary, lblTakeHome;
     @FXML
     private AnchorPane profilePage, salaryPage,passChangePage;
     @FXML
@@ -128,11 +128,14 @@ public class EmployeeController {
     private void setSalaryInfo(Employee employee) {
         Calculator calc = new Calculator();
         GData gData = getGData();
-        lblRentrebate.setText(String.valueOf(gData.getBonMaskan()));
-        lblmonetaryrebate.setText(String.valueOf(gData.getBonNagdi()));
+        lblRentRebate.setText(String.valueOf(gData.getBonMaskan()));
+        lblMonetaryRebate.setText(String.valueOf(gData.getBonNagdi()));
         lblChildbenefit.setText(String.valueOf(calc.calcHagOlad(employee)));
-        lblBasesalary.setText(String.valueOf(employee.getBaseSalary()));
-        lblSalarySum.setText(String.valueOf(calc.calcPostTaxSal(employee)));
+        lblBaseSalary.setText(String.valueOf(employee.getBaseSalary()));
+        lblSum.setText(String.valueOf(calc.sumSalary(employee)));
+        lblInsurance.setText(String.valueOf(calc.calcHagOlad(employee)));
+        lblTax.setText(String.valueOf(calc.calcTax(employee)));
+        lblTakeHome.setText(String.valueOf(calc.calcPostTaxSal(employee)));
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {

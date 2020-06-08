@@ -10,16 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.com.advprogram.accountingApp.api.Accountant;
-import main.java.com.advprogram.accountingApp.api.Employee;
-import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
-import main.java.com.advprogram.accountingApp.api.PasswordGenerator;
+import main.java.com.advprogram.accountingApp.api.*;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
 import main.java.com.advprogram.accountingApp.spi.Dao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -27,9 +25,11 @@ import java.util.Optional;
 public class AccountantController {
     @FXML
     private JFXButton btnProfilePage, vboxBtnAddEmp, btnEditEmployee,
-            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID;
+            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID, btnNextMonth;
     @FXML
-    private Label lblProfName, lblAccNo, lblNameDisplay, emptyfeildFN,
+    private Label lblProfName, lblAccNo, lblNameDisplay,
+            lblDate,
+            emptyfeildFN,
             emptyfeildLN,
             emptyfeildNI,
             emptyfeildNOO,
@@ -58,6 +58,7 @@ public class AccountantController {
 
     public void initSessionID(final LoginManager loginManager, Accountant accountant) {
         setProfileInfo(accountant);
+        lblDate.setText(getDate().toString());
 
         btnSearchID.setOnAction(event -> {
             Employee employee = new Employee();
@@ -102,6 +103,16 @@ public class AccountantController {
             String password = passwordGenerator.generate(8);
             employee.setPass(hashPassword(password));
             addEmployee(employee);
+        });
+
+        btnNextMonth.setOnAction(event -> {
+            int input = JOptionPane.showConfirmDialog(null,
+                    "Are you sure? \n You cannot revert this action.", "Next Month",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (input == 0) {
+                nextMonth();
+                lblDate.setText(getDate().toString());
+            }
         });
 
         /* Event handlers for side menu items */
@@ -221,6 +232,17 @@ public class AccountantController {
     private void addEmployee(Employee employee) {
         DAO.save(employee);
     }
+
+    private void nextMonth() {
+        DAO.nextMonth();
+    }
+    private LocalDate getDate() {
+        GData gData = getGData();
+        return gData.getDate().toLocalDate();
+    }
+
+    private GData getGData() { return DAO.getGData(); }
+
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
