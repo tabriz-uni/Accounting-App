@@ -25,7 +25,7 @@ import java.util.Optional;
 public class AccountantController {
     @FXML
     private JFXButton btnProfilePage, vboxBtnAddEmp, btnEditEmployee,
-            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID, btnNextMonth;
+            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID, btnNextMonth, btnNextMonthPage, btnAddEmp;
     @FXML
     private Label lblProfName, lblAccNo, lblNameDisplay,
             lblDate,
@@ -38,7 +38,7 @@ public class AccountantController {
             emptyfeildBS,
             empexstswarning;
     @FXML
-    private AnchorPane profilePage, personnelTablePage, empAddPage, employeeEditPage;
+    private AnchorPane profilePage, personnelTablePage, empAddPage, employeeEditPage, datePage;
     @FXML
     private TableView<EmployeeT> personnelTable;
     @FXML
@@ -46,8 +46,6 @@ public class AccountantController {
     @FXML
     private TextField txtFNameAdd, txtLNameAdd, txtIDAdd, txtOffspringAdd, txtTitleAdd, txtBaseSalaryAdd, txtWorkExpAdd,
             txtIdSearch, txtTitleEdit, txtSalaryEdit, txtOffspringsEdit;
-    @FXML
-    private Button btnAddEmp;
 
     final ObservableList<EmployeeT> dataET =
             FXCollections.observableArrayList();
@@ -121,13 +119,14 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
+            datePage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
             empAddPage.setVisible(false);
             employeeEditPage.setVisible(false);
             personnelTablePage.setVisible(false);
-
+            datePage.setVisible(false);
         });
 
         btnPrsnlInfo.setOnAction(event -> {
@@ -135,12 +134,14 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(magenta());
+            datePage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             empAddPage.setVisible(false);
             employeeEditPage.setVisible(false);
             personnelTablePage.setVisible(true);
+            datePage.setVisible(false);
         });
 
         vboxBtnAddEmp.setOnAction(event -> {
@@ -148,13 +149,14 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(magenta());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
+            datePage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             empAddPage.setVisible(true);
             employeeEditPage.setVisible(false);
             personnelTablePage.setVisible(false);
-
+            datePage.setVisible(false);
         });
 
         btnEditEmployee.setOnAction(event -> {
@@ -162,15 +164,30 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(magenta());
             btnPrsnlInfo.setStyle(purple());
+            datePage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
             empAddPage.setVisible(false);
             employeeEditPage.setVisible(true);
             personnelTablePage.setVisible(false);
-
+            datePage.setVisible(false);
         });
 
+        btnNextMonthPage.setOnAction(event -> {
+            btnProfilePage.setStyle(purple());
+            vboxBtnAddEmp.setStyle(purple());
+            btnEditEmployee.setStyle(purple());
+            btnPrsnlInfo.setStyle(purple());
+            datePage.setStyle(magenta());
+            btnExit.setStyle(purple());
+            btnLogout.setStyle(purple());
+            profilePage.setVisible(false);
+            empAddPage.setVisible(false);
+            employeeEditPage.setVisible(false);
+            personnelTablePage.setVisible(false);
+            datePage.setVisible(true);
+        });
 
         btnLogout.setOnAction(event -> {
             btnProfilePage.setStyle(purple());
