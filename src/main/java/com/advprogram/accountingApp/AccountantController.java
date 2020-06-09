@@ -119,7 +119,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            datePage.setStyle(purple());
+            btnNextMonthPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
@@ -134,7 +134,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(magenta());
-            datePage.setStyle(purple());
+            btnNextMonthPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -149,7 +149,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(magenta());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            datePage.setStyle(purple());
+            btnNextMonthPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -164,7 +164,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(magenta());
             btnPrsnlInfo.setStyle(purple());
-            datePage.setStyle(purple());
+            btnNextMonthPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -179,7 +179,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            datePage.setStyle(magenta());
+            btnNextMonthPage.setStyle(magenta());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
