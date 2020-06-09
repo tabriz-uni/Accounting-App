@@ -33,7 +33,7 @@
                         </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="114.0">
                      <image>
-                        <Image url="@../../../../res/icons/list-icon.png" />
+                        <Image url="@../../../../res/icons/create-icon.png" />
                      </image>
                   </ImageView>
                         <ImageView fitHeight="40.0" fitWidth="40.0">

@@ -36,17 +36,17 @@
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="114.0">
                      <image>
-                        <Image url="@../../../../res/icons/list-icon.png" />
+                        <Image url="@../../../../res/icons/create-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="114.0">
                      <image>
-                        <Image url="@../../../../res/icons/list-icon.png" />
+                        <Image url="@../../../../res/icons/create-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="270.0">
                      <image>
-                        <Image url="@../../../../res/icons/list-icon.png" />
+                        <Image url="@../../../../res/icons/confirm-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0">
@@ -70,28 +70,49 @@
             </left>
             <right>
                 <VBox alignment="TOP_CENTER" prefHeight="561.0" prefWidth="114.0" spacing="13.0" style="-fx-background-color: #181818;" BorderPane.alignment="CENTER">
-                    <JFXButton fx:id="btnProfilePage" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Profile" textFill="WHITE">
+                    <JFXButton fx:id="btnProfilePage" alignment="CENTER" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Profile" textAlignment="CENTER" textFill="WHITE">
                         <font>
                             <Font size="16.0" />
                         </font>
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding>
                     </JFXButton>
-                    <JFXButton fx:id="btnPrsnlInfo" alignment="CENTER" buttonType="RAISED" prefHeight="65.0" prefWidth="124.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Personnel info" textFill="WHITE">
+                    <JFXButton fx:id="btnPrsnlInfo" alignment="CENTER" buttonType="RAISED" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Personnel info" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font size="13.0" />
                   </font>
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding>
                     </JFXButton>
-               <JFXButton fx:id="vboxBtnAddEmp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Add New Emloyee" textFill="WHITE" />
-               <JFXButton fx:id="btnEditEmployee" alignment="CENTER" layoutX="10.0" layoutY="179.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Edit Employee" textFill="WHITE" />
-               <JFXButton fx:id="btnEditEmployee1" alignment="CENTER" layoutX="10.0" layoutY="257.0" prefHeight="65.0" prefWidth="118.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="  Next month" textFill="WHITE" />
-                    <JFXButton fx:id="btnLogout" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Logout" textFill="WHITE">
+               <JFXButton fx:id="vboxBtnAddEmp" alignment="CENTER" layoutX="33.0" layoutY="335.0" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="New Emloyee" textAlignment="CENTER" textFill="WHITE">
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding></JFXButton>
+               <JFXButton fx:id="btnEditEmployee" alignment="CENTER" layoutX="10.0" layoutY="179.0" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Edit Employee" textAlignment="CENTER" textFill="WHITE">
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding></JFXButton>
+               <JFXButton fx:id="btnNextMonthPage" alignment="CENTER" layoutX="10.0" layoutY="257.0" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="  Next month" textAlignment="CENTER" textFill="WHITE">
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding></JFXButton>
+                    <JFXButton fx:id="btnLogout" alignment="CENTER" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Logout" textAlignment="CENTER" textFill="WHITE">
                         <font>
                             <Font size="16.0" />
                         </font>
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding>
                     </JFXButton>
-               <JFXButton fx:id="btnExit" alignment="CENTER" prefHeight="65.0" prefWidth="105.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Exit" textFill="WHITE">
+               <JFXButton fx:id="btnExit" alignment="CENTER" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="Exit" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font size="16.0" />
                   </font>
+                  <padding>
+                     <Insets left="-2.0" right="-2.0" />
+                  </padding>
                </JFXButton>
                     <padding>
                         <Insets top="13.0" />
@@ -106,7 +127,7 @@
     <center>
         <AnchorPane fx:id="centerAnchor" prefHeight="561.0" prefWidth="547.0" styleClass="pane-main" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane fx:id="profilePage" prefHeight="561.0" prefWidth="765.0" visible="false">
+                <AnchorPane fx:id="profilePage" layoutX="5.0" prefHeight="561.0" prefWidth="760.0">
                     <children>
                         <AnchorPane layoutX="110.0" layoutY="81.0" prefHeight="191.0" prefWidth="545.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 30;">
                             <children>
@@ -309,7 +330,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="561.0" prefWidth="778.0">
+            <AnchorPane fx:id="datePage" prefHeight="561.0" prefWidth="778.0" visible="false">
                <children>
                   <AnchorPane layoutX="218.0" layoutY="91.0" prefHeight="245.0" prefWidth="343.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 70;">
                      <children>
