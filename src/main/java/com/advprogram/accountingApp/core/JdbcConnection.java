@@ -19,9 +19,9 @@ public class JdbcConnection {
 
     public static Optional<Connection> getConnection() {
         if (connection.isEmpty()) {
-            String url = "";
-            String user = "";
-            String password = "";
+            String url = "jdbc:postgresql://ec2-52-71-55-81.compute-1.amazonaws.com:5432/d2jvhhni1cnviu";
+            String user = "wsamkhthtghubs";
+            String password = "bfe43e9607563aeee35c5281c3055792fcd800898853d16de8d56ff16d5d9e9b";
 
             try {
                 connection = Optional.ofNullable(DriverManager.getConnection(url, user, password));
