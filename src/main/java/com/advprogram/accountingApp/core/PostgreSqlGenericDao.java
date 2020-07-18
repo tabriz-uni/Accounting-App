@@ -1,8 +1,8 @@
 package main.java.com.advprogram.accountingApp.core;
 
-import main.java.com.advprogram.accountingApp.api.GData;
-import main.java.com.advprogram.accountingApp.api.Employee;
-import main.java.com.advprogram.accountingApp.spi.Dao;
+import main.java.com.advprogram.accountingApp.model.GData;
+import main.java.com.advprogram.accountingApp.model.Employee;
+import main.java.com.advprogram.accountingApp.dao.GenericDao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PostgreSqlDao implements Dao<Employee, Integer> {
+public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
 
-    private static final Logger LOGGER = Logger.getLogger(PostgreSqlDao.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PostgreSqlGenericDao.class.getName());
     private final Optional<Connection> connection;
 
-    public PostgreSqlDao() {
+    public PostgreSqlGenericDao() {
         this.connection = JdbcConnection.getConnection();
     }
 

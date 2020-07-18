@@ -1,4 +1,4 @@
-package main.java.com.advprogram.accountingApp.api;
+package main.java.com.advprogram.accountingApp.model;
 
 public class Accountant extends User {
 

@@ -1,4 +1,4 @@
-package main.java.com.advprogram.accountingApp;
+package main.java.com.advprogram.accountingApp.controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,10 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.advprogram.accountingApp.core.LoginManager;
 import main.java.com.advprogram.accountingApp.api.*;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
-import main.java.com.advprogram.accountingApp.spi.Dao;
+import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
+import main.java.com.advprogram.accountingApp.dao.GenericDao;
+import main.java.com.advprogram.accountingApp.model.Accountant;
+import main.java.com.advprogram.accountingApp.model.Employee;
+import main.java.com.advprogram.accountingApp.model.GData;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
@@ -50,7 +54,7 @@ public class AccountantController {
     final ObservableList<EmployeeT> dataET =
             FXCollections.observableArrayList();
 
-    private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
+    private static final GenericDao<Employee, Integer> GENERIC_DAO = new PostgreSqlGenericDao();
 
     public void initialize() { }
 
@@ -236,29 +240,29 @@ public class AccountantController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = DAO.get(id);
+        Optional<Employee> employee = GENERIC_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
     private void updateEmployee(Employee employee) {
-        DAO.update(employee);
+        GENERIC_DAO.update(employee);
     }
 
     public static Collection<Employee> getAllEmployees() {
-        return DAO.getAll();
+        return GENERIC_DAO.getAll();
     }
     private void addEmployee(Employee employee) {
-        DAO.save(employee);
+        GENERIC_DAO.save(employee);
     }
 
     private void nextMonth() {
-        DAO.nextMonth();
+        GENERIC_DAO.nextMonth();
     }
     private LocalDate getDate() {
         GData gData = getGData();
         return gData.getDate().toLocalDate();
     }
 
-    private GData getGData() { return DAO.getGData(); }
+    private GData getGData() { return GENERIC_DAO.getGData(); }
 
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());

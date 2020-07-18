@@ -1,23 +1,22 @@
-package main.java.com.advprogram.accountingApp;
+package main.java.com.advprogram.accountingApp.controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.com.advprogram.accountingApp.api.Calculator;
-import main.java.com.advprogram.accountingApp.api.Employee;
-import main.java.com.advprogram.accountingApp.api.GData;
+import main.java.com.advprogram.accountingApp.core.LoginManager;
+import main.java.com.advprogram.accountingApp.core.Calculator;
+import main.java.com.advprogram.accountingApp.dao.*;
+import main.java.com.advprogram.accountingApp.model.Employee;
+import main.java.com.advprogram.accountingApp.model.GData;
 import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlDao;
-import main.java.com.advprogram.accountingApp.spi.Dao;
+import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
-import java.sql.Connection;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 /** Controls the professor's page */
 public class EmployeeController {
@@ -34,7 +33,8 @@ public class EmployeeController {
 
     public void initialize() { }
 
-    private static final Dao<Employee, Integer> DAO = new PostgreSqlDao();
+    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
 
     public void initSessionID(final LoginManager loginManager, Employee employee) {
         setProfileInfo(employee);
@@ -127,9 +127,9 @@ public class EmployeeController {
     }
     private void setSalaryInfo(Employee employee) {
         Calculator calc = new Calculator();
-        GData gData = getGData();
-        lblRentRebate.setText(String.valueOf(gData.getBonMaskan()));
-        lblMonetaryRebate.setText(String.valueOf(gData.getBonNagdi()));
+        Optional<GData> gData = getGData();
+        lblRentRebate.setText(String.valueOf(gData.get().getBonMaskan()));
+        lblMonetaryRebate.setText(String.valueOf(gData.get().getBonNagdi()));
         lblChildbenefit.setText(String.valueOf(calc.calcHagOlad(employee)));
         lblBaseSalary.setText(String.valueOf(employee.getBaseSalary()));
         lblSum.setText(String.valueOf(calc.sumSalary(employee)));
@@ -139,7 +139,7 @@ public class EmployeeController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = DAO.get(id);
+        Optional<Employee> employee = USER_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
 
@@ -151,9 +151,9 @@ public class EmployeeController {
     }
     private void updatePass(Employee employee, String plainPassword) {
         employee.setPass(hashPassword(plainPassword));
-        DAO.updatePass(employee);
+        USER_DAO.update(employee);
     }
-    private GData getGData() { return DAO.getGData(); }
+    private Optional<GData> getGData() { return GDATA_DAO.get(1); }
 
     private String purple() {
         return "-fx-background-color: #673ab7; -fx-background-radius: 70";

@@ -1,4 +1,4 @@
-package main.java.com.advprogram.accountingApp.api;
+package main.java.com.advprogram.accountingApp.model;
 
 import java.sql.Date;
 
@@ -11,6 +11,15 @@ public class GData {
     int sabetHogug;
     Date date;
 
+    public GData(int baseSalary, int bonMaskan, int bonNagdi, int hagOlad, int payeSanavat, int sabetHogug, Date date) {
+        this.baseSalary = baseSalary;
+        this.bonMaskan = bonMaskan;
+        this.bonNagdi = bonNagdi;
+        this.hagOlad = hagOlad;
+        this.payeSanavat = payeSanavat;
+        this.sabetHogug = sabetHogug;
+        this.date = date;
+    }
     public int getSabetHogug() {
         return sabetHogug;
     }

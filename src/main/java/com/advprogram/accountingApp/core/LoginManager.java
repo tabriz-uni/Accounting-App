@@ -1,12 +1,14 @@
-package main.java.com.advprogram.accountingApp;
+package main.java.com.advprogram.accountingApp.core;
 
 import java.io.*;
 import java.util.logging.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import main.java.com.advprogram.accountingApp.api.Accountant;
-import main.java.com.advprogram.accountingApp.api.Employee;
-import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.model.Accountant;
+import main.java.com.advprogram.accountingApp.model.Employee;
+import main.java.com.advprogram.accountingApp.controller.AccountantController;
+import main.java.com.advprogram.accountingApp.controller.EmployeeController;
+import main.java.com.advprogram.accountingApp.controller.LoginController;
 
 /** Manages control flow for logins */
 public class LoginManager extends Node {
@@ -38,7 +40,7 @@ public class LoginManager extends Node {
     public void showLoginScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("loginView.fxml")
+                    getClass().getResource("../../../../res/layout/loginView.fxml")
             );
             scene.setRoot(loader.load());
             LoginController controller =
@@ -52,7 +54,7 @@ public class LoginManager extends Node {
     private void showAccountantView(Accountant accountant) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("accountantView.fxml")
+                    getClass().getResource("../../../../res/layout/accountantView.fxml")
             );
             scene.setRoot(loader.load());
             AccountantController controller =
@@ -65,7 +67,7 @@ public class LoginManager extends Node {
     private void showEmployeeView(Employee employee) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("employeeView.fxml")
+                    getClass().getResource("../../../../res/layout/employeeView.fxml")
             );
             scene.setRoot(loader.load());
             EmployeeController controller =

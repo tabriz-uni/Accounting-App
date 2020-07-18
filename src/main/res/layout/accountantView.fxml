@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.AccountantController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="930.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.advprogram.accountingApp.controller.AccountantController">
     <left>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -23,7 +23,7 @@
                     <children>
                         <ImageView fitHeight="40.0" fitWidth="40.0">
                             <image>
-                                <Image url="@../../../../res/icons/profile-icon.png" />
+                                <Image url="@../icons/profile-icon.png" />
                             </image>
                             <VBox.margin>
                                 <Insets top="2.0" />
@@ -31,27 +31,27 @@
                         </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0">
                      <image>
-                        <Image url="@../../../../res/icons/list-icon.png" />
+                        <Image url="@../icons/list-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="114.0">
                      <image>
-                        <Image url="@../../../../res/icons/create-icon.png" />
+                        <Image url="@../icons/create-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="114.0">
                      <image>
-                        <Image url="@../../../../res/icons/create-icon.png" />
+                        <Image url="@../icons/create-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="270.0">
                      <image>
-                        <Image url="@../../../../res/icons/confirm-icon.png" />
+                        <Image url="@../icons/confirm-icon.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0">
                      <image>
-                        <Image url="@../../../../res/icons/logout-icon.png" />
+                        <Image url="@../icons/logout-icon.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="1.0" />
@@ -59,7 +59,7 @@
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0">
                      <image>
-                        <Image url="@../../../../res/icons/exit-icon.png" />
+                        <Image url="@../icons/exit-icon.png" />
                      </image>
                   </ImageView>
                     </children>
@@ -125,7 +125,7 @@
         </BorderPane>
     </left>
     <center>
-        <AnchorPane fx:id="centerAnchor" prefHeight="561.0" prefWidth="547.0" styleClass="pane-main" stylesheets="@style.css" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="centerAnchor" prefHeight="561.0" prefWidth="547.0" styleClass="pane-main" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane fx:id="profilePage" layoutX="5.0" prefHeight="561.0" prefWidth="760.0">
                     <children>
@@ -141,12 +141,12 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblAccNo" layoutX="241.0" layoutY="107.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                                <Label fx:id="lblAccNo" layoutX="241.0" layoutY="107.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@../css/style.css" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblProfName" layoutX="241.0" layoutY="43.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@style.css" textFill="#dccbcb">
+                                <Label fx:id="lblProfName" layoutX="241.0" layoutY="43.0" prefHeight="41.0" prefWidth="279.0" styleClass="text-white" stylesheets="@../css/style.css" textFill="#dccbcb">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -160,7 +160,7 @@
                 </AnchorPane>
             <AnchorPane fx:id="personnelTablePage" prefHeight="561.0" prefWidth="765.0" visible="false">
                <children>
-                  <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@style.css" text="Personnel List" textFill="WHITE">
+                  <Label layoutX="35.0" layoutY="14.0" prefHeight="41.0" prefWidth="177.0" stylesheets="@../css/style.css" text="Personnel List" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -179,7 +179,7 @@
                </children></AnchorPane>
             <AnchorPane fx:id="empAddPage" layoutX="-1.0" prefHeight="561.0" prefWidth="776.0" visible="false">
                <children>
-                  <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: #97117A; -fx-background-radius: 20;" stylesheets="@style.css" text="Add New Employee" textAlignment="RIGHT" textFill="WHITE">
+                  <Label layoutX="22.0" layoutY="14.0" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: #97117A; -fx-background-radius: 20;" stylesheets="@../css/style.css" text="Add New Employee" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>

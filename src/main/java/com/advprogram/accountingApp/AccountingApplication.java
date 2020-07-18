@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.advprogram.accountingApp.core.LoginManager;
 
 public class AccountingApplication extends Application {
     @Override
@@ -31,7 +32,7 @@ public class AccountingApplication extends Application {
 
     /*
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
-    private static final Dao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlDao();
+    private static final GenericDao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlGenericDao();
 
     public static void main(String[] args) {
         //Test whether an exception is thrown when

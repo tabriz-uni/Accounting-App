@@ -31,13 +31,13 @@
     -fx-stroke: white;
 }
 .pane-login{
-    -fx-background-image: url("../../../../res/backgrounds/login-background.jpg");
+    -fx-background-image: url("../backgrounds/login-background.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 1000 600;
     -fx-background-position: center center;
 }
 .pane-main{
-    -fx-background-image: url("../../../../res/backgrounds/main-background.jpg");
+    -fx-background-image: url("../backgrounds/main-background.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 1000 600;
     -fx-background-position: center center;
