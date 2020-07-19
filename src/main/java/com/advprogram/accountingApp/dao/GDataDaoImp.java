@@ -81,12 +81,27 @@ public class GDataDaoImp implements GDataDao<GData> {
     public void delete(GData gData) {
 
     }
-
+    /*
     @Override
     public void nextMonth() {
         String sql = "UPDATE global_data "
                 + "SET "
                 + "app_date = app_date + INTERVAL '1 month'";
+        connection.ifPresent(conn -> {
+            try(Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+    }
+    */
+
+    @Override
+    public void nextDay() {
+        String sql = "UPDATE global_data "
+                + "SET "
+                + "app_date = app_date + INTERVAL '1 day'";
         connection.ifPresent(conn -> {
             try(Statement statement = conn.createStatement()) {
                 statement.executeUpdate(sql);

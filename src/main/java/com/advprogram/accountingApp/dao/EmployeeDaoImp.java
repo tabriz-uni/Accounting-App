@@ -39,9 +39,11 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
                     int workExp = resultSet.getInt("work_exp");
                     int workExpHere = resultSet.getInt("work_exp_here");
                     int baseSalary = resultSet.getInt("base_salary");
+                    int workedDays = resultSet.getInt("days_worked");
+                    boolean workedToday = resultSet.getBoolean("worked_today");
 
                     employee = Optional.of(new Employee(id, firstName, lastName, pass,
-                            offsprings, title, workExp, workExpHere, baseSalary));
+                            offsprings, title, workExp, workExpHere, baseSalary, workedDays, workedToday));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
@@ -71,9 +73,11 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
                     int workExp = resultSet.getInt("work_exp");
                     int workExpHere = resultSet.getInt("work_exp_here");
                     int baseSalary = resultSet.getInt("base_salary");
+                    int workedDays = resultSet.getInt("days_worked");
+                    boolean workedToday = resultSet.getBoolean("worked_today");
 
                     Employee employee = new Employee(id, firstName, lastName, pass,
-                            offsprings, title, workExp, workExpHere, baseSalary);
+                            offsprings, title, workExp, workExpHere, baseSalary, workedDays, workedToday);
 
                     employees.add(employee);
 
@@ -167,6 +171,36 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
                 LOGGER.log(Level.INFO, "Was the employee deleted successfully? {0}",
                         numberOfDeletedRows > 0);
 
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    @Override
+    public void nextDay() {
+        String sql = "UPDATE employee " +
+                "SET " +
+                "worked_today = false;";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()){
+                statement.executeUpdate(sql);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    @Override
+    public void nextMonth() {
+        String sql = "UPDATE employee " +
+                "SET " +
+                "days_worked = 0;";
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement()){
+                statement.executeUpdate(sql);
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }

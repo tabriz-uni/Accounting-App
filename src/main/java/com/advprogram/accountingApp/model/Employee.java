@@ -8,13 +8,19 @@ public class Employee extends User {
     private int baseSalary;
     private String title;
 
-    public Employee(int id, String firstName, String lastName, String pass, int offsprings, String title, int workExp, int workExpHere, int baseSalary) {
+    private boolean workedToday;
+
+    public Employee(int id, String firstName, String lastName, String pass,
+                    int offsprings, String title, int workExp, int workExpHere,
+                    int baseSalary, int workedDays, boolean workedToday) {
         super(id, firstName, lastName, pass);
         this.offsprings = offsprings;
         this.title = title;
         this.workExp = workExp;
         this.workExpHere = workExpHere;
         this.baseSalary = baseSalary;
+        this.workedDays = workedDays;
+        this.workedToday = workedToday;
     }
 
     public Employee() {
@@ -59,5 +65,23 @@ public class Employee extends User {
 
     public void setBaseSalary(int baseSalary) {
         this.baseSalary = baseSalary;
+    }
+
+    public int getWorkedDays() {
+        return workedDays;
+    }
+
+    public void setWorkedDays(int workedDays) {
+        this.workedDays = workedDays;
+    }
+
+    private int workedDays;
+
+    public boolean isWorkedToday() {
+        return workedToday;
+    }
+
+    public void setWorkedToday(boolean workedToday) {
+        this.workedToday = workedToday;
     }
 }

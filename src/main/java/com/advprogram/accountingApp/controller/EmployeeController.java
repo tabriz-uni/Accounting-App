@@ -33,7 +33,7 @@ public class EmployeeController {
 
     public void initialize() { }
 
-    private static final EmployeeDao<Employee> USER_DAO = new EmployeeDaoImp();
+    private static final EmployeeDao<Employee> EMPLOYEE_DAO = new EmployeeDaoImp();
     private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
 
     public void initSessionID(final LoginManager loginManager, User user) {
@@ -44,6 +44,11 @@ public class EmployeeController {
             System.out.println("Employee not found!");
         }
         assert employee != null;
+        if (!employee.isWorkedToday()){
+            employee.setWorkedDays(employee.getWorkedDays() + 1);
+            employee.setWorkedToday(true);
+        }
+        updateEmployee(employee);
         setProfileInfo(employee);
         setSalaryInfo(employee);
         Employee finalEmployee = employee;
@@ -147,8 +152,12 @@ public class EmployeeController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = USER_DAO.get(id);
+        Optional<Employee> employee = EMPLOYEE_DAO.get(id);
         return employee.orElseThrow(NonExistentEmployeeException::new);
+    }
+
+    private void updateEmployee(Employee employee) {
+        EMPLOYEE_DAO.update(employee);
     }
 
     private String hashPassword(String plainTextPassword){
@@ -159,7 +168,7 @@ public class EmployeeController {
     }
     private void updatePass(Employee employee, String plainPassword) {
         employee.setPass(hashPassword(plainPassword));
-        USER_DAO.update(employee);
+        EMPLOYEE_DAO.update(employee);
     }
     private Optional<GData> getGData() { return GDATA_DAO.get(1); }
 

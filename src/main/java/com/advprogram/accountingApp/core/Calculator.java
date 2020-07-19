@@ -12,9 +12,15 @@ public class Calculator {
     Optional<GData> optionalGData = getGData();
     GData gData= optionalGData.orElseThrow();
 
+    public void nextDay() {
+        GDATA_DAO.nextDay();
+        EMPLOYEE_DAO.nextDay();
+        if (getDay() == 1)
+            nextMonth();
+    }
     public void nextMonth() {
+        EMPLOYEE_DAO.nextMonth();
         gData = getGData().get();
-        GDATA_DAO.nextMonth();
         if (getmonth() == 1)
             nextYear();
     }
@@ -30,10 +36,10 @@ public class Calculator {
     }
     public int calcHagBime(Employee employee) {
         if (getmonth() <= 6)
-            return ((employee.getBaseSalary() * 31) +
+            return ((employee.getBaseSalary() * employee.getWorkedDays()) +
                     gData.getBonNagdi() + gData.getBonMaskan()) * 7/100;
         else
-            return ((employee.getBaseSalary() * 30) +
+            return ((employee.getBaseSalary() * employee.getWorkedDays()) +
                     gData.getBonNagdi() + gData.getBonMaskan()) * 7/100;
     }
     public int calcHagOlad(Employee employee) {
@@ -44,10 +50,10 @@ public class Calculator {
     }
     public int sumSalary(Employee employee) {
         if (getmonth() <= 6)
-            return (employee.getBaseSalary() * 31) + calcHagOlad(employee) +
+            return (employee.getBaseSalary() * employee.getWorkedDays()) + calcHagOlad(employee) +
                     gData.getBonNagdi() + gData.getBonMaskan();
         else
-            return (employee.getBaseSalary() * 30) + calcHagOlad(employee) +
+            return (employee.getBaseSalary() * employee.getWorkedDays()) + calcHagOlad(employee) +
                     gData.getBonNagdi() + gData.getBonMaskan() +
                     calcEidi(employee);
     }
@@ -86,4 +92,5 @@ public class Calculator {
     private int getmonth() {
         return gData.getDate().toLocalDate().getMonthValue();
     }
+    private int getDay() { return gData.getDate().toLocalDate().getDayOfMonth(); }
 }

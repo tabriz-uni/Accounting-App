@@ -28,7 +28,7 @@ import java.util.Optional;
 public class AccountantController {
     @FXML
     private JFXButton btnProfilePage, vboxBtnAddEmp, btnEditEmployee,
-            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID, btnNextMonth, btnNextMonthPage, btnAddEmp;
+            btnSubmitChanges, btnPrsnlInfo, btnLogout, btnExit, btnSearchID, btnNextDay, btnNextDayPage, btnAddEmp;
     @FXML
     private Label lblProfName, lblAccNo, lblNameDisplay,
             lblDate,
@@ -77,8 +77,8 @@ public class AccountantController {
             }
             Employee finalEmployee = employee;
             btnSubmitChanges.setOnAction(eventSec -> {
-                if (txtTitleEdit.getText() == null || txtSalaryEdit.getText() == null ||
-                        txtOffspringsEdit == null) {
+                if (txtTitleEdit.getText().equals("") || txtSalaryEdit.getText().equals("") ||
+                        txtOffspringsEdit.equals("")) {
                     //TODO
                     return;
                 }
@@ -91,6 +91,19 @@ public class AccountantController {
 
 
         btnAddEmp.setOnAction(event -> {
+            if (txtIDAdd.getText().equals("") || txtFNameAdd.getText().equals("") || txtLNameAdd.getText().equals("") ||
+                txtOffspringAdd.getText().equals("") || txtTitleAdd.getText().equals("") ||
+                txtBaseSalaryAdd.getText().equals("") || txtWorkExpAdd.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter all inputs!",
+                        "Invalid inputs!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            try {
+                getEmployee(Integer.parseInt(txtIDAdd.getText()));
+                JOptionPane.showMessageDialog(null, "This id already exists!", "ID exists!", JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (NonExistentEntityException ignored) {
+            }
             Employee employee = new Employee();
             employee.setId(Integer.parseInt(txtIDAdd.getText()));
             employee.setFirstName(txtFNameAdd.getText());
@@ -109,12 +122,12 @@ public class AccountantController {
             addEmployee(employee);
         });
 
-        btnNextMonth.setOnAction(event -> {
+        btnNextDay.setOnAction(event -> {
             int input = JOptionPane.showConfirmDialog(null,
-                    "Are you sure? \n You cannot revert this action.", "Next Month",
+                    "Are you sure? \n You cannot revert this action.", "Next Day",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (input == 0) {
-                nextMonth();
+                nextDay();
                 lblDate.setText(getDate().toString());
             }
         });
@@ -125,7 +138,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            btnNextMonthPage.setStyle(purple());
+            btnNextDayPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(true);
@@ -140,7 +153,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(magenta());
-            btnNextMonthPage.setStyle(purple());
+            btnNextDayPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -155,7 +168,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(magenta());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            btnNextMonthPage.setStyle(purple());
+            btnNextDayPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -170,7 +183,7 @@ public class AccountantController {
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(magenta());
             btnPrsnlInfo.setStyle(purple());
-            btnNextMonthPage.setStyle(purple());
+            btnNextDayPage.setStyle(purple());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -180,12 +193,12 @@ public class AccountantController {
             datePage.setVisible(false);
         });
 
-        btnNextMonthPage.setOnAction(event -> {
+        btnNextDayPage.setOnAction(event -> {
             btnProfilePage.setStyle(purple());
             vboxBtnAddEmp.setStyle(purple());
             btnEditEmployee.setStyle(purple());
             btnPrsnlInfo.setStyle(purple());
-            btnNextMonthPage.setStyle(magenta());
+            btnNextDayPage.setStyle(magenta());
             btnExit.setStyle(purple());
             btnLogout.setStyle(purple());
             profilePage.setVisible(false);
@@ -256,8 +269,8 @@ public class AccountantController {
         EMPLOYEE_DAO.save(employee);
     }
 
-    private void nextMonth() {
-        calculator.nextMonth();
+    private void nextDay() {
+        calculator.nextDay();
     }
     private LocalDate getDate() {
         Optional<GData> gData = getGData();
@@ -265,6 +278,8 @@ public class AccountantController {
     }
 
     private Optional<GData> getGData() { return GDATA_DAO.get(0); }
+
+
 
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
