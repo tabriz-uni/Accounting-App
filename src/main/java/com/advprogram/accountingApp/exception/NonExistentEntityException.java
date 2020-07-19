@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.advprogram.accountingApp.core;
+package main.java.com.advprogram.accountingApp.exception;
 
 public class NonExistentEntityException extends Throwable {
 

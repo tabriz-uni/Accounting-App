@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.com.advprogram.accountingApp.core.*;
 import main.java.com.advprogram.accountingApp.dao.*;
+import main.java.com.advprogram.accountingApp.exception.NonExistentEmployeeException;
+import main.java.com.advprogram.accountingApp.exception.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.model.Accountant;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;

@@ -6,11 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import main.java.com.advprogram.accountingApp.AccountingApplication;
 import main.java.com.advprogram.accountingApp.core.LoginManager;
-import main.java.com.advprogram.accountingApp.core.NonExistentEmployeeException;
+import main.java.com.advprogram.accountingApp.exception.NonExistentEmployeeException;
 import main.java.com.advprogram.accountingApp.dao.UserDao;
 import main.java.com.advprogram.accountingApp.dao.UserDaoImp;
 import main.java.com.advprogram.accountingApp.model.Accountant;
-import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.exception.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
