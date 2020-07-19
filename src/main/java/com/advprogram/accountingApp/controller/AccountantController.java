@@ -51,8 +51,10 @@ public class AccountantController {
     final ObservableList<EmployeeT> dataET =
             FXCollections.observableArrayList();
 
-    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final EmployeeDao<Employee> EMPLOYEE_DAO = new EmployeeDaoImp();
     private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
+
+    private final Calculator calculator = new Calculator();
 
     public void initialize() { }
 
@@ -238,22 +240,22 @@ public class AccountantController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = USER_DAO.get(id);
+        Optional<Employee> employee = EMPLOYEE_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
     private void updateEmployee(Employee employee) {
-        USER_DAO.update(employee);
+        EMPLOYEE_DAO.update(employee);
     }
 
     public static Collection<Employee> getAllEmployees() {
-        return USER_DAO.getAll();
+        return EMPLOYEE_DAO.getAll();
     }
     private void addEmployee(Employee employee) {
-        USER_DAO.save(employee);
+        EMPLOYEE_DAO.save(employee);
     }
 
     private void nextMonth() {
-        GDATA_DAO.nextMonth();
+        calculator.nextMonth();
     }
     private LocalDate getDate() {
         Optional<GData> gData = getGData();

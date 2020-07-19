@@ -7,12 +7,12 @@ import main.java.com.advprogram.accountingApp.model.GData;
 import java.util.Optional;
 
 public class Calculator {
-    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final EmployeeDao<Employee> EMPLOYEE_DAO = new EmployeeDaoImp();
     private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
     Optional<GData> optionalGData = getGData();
     GData gData= optionalGData.orElseThrow();
 
-    private void nextMonth() {
+    public void nextMonth() {
         gData = getGData().get();
         GDATA_DAO.nextMonth();
         if (getmonth() == 1)
@@ -78,7 +78,7 @@ public class Calculator {
 
     private Optional<GData> getGData() { return GDATA_DAO.get(1); }
     private void increEmployeeData() {
-        USER_DAO.increEmployeeData(getGData());
+        EMPLOYEE_DAO.increEmployeeData(getGData());
     }
     private void increGlobalData() {
         GDATA_DAO.update(gData);

@@ -12,6 +12,7 @@ import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
 import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
+import main.java.com.advprogram.accountingApp.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
@@ -32,19 +33,27 @@ public class EmployeeController {
 
     public void initialize() { }
 
-    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final EmployeeDao<Employee> USER_DAO = new EmployeeDaoImp();
     private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
 
-    public void initSessionID(final LoginManager loginManager, Employee employee) {
+    public void initSessionID(final LoginManager loginManager, User user) {
+        Employee employee = null;
+        try {
+            employee = getEmployee(user.getId());
+        } catch (NonExistentEntityException e) {
+            System.out.println("Employee not found!");
+        }
+        assert employee != null;
         setProfileInfo(employee);
         setSalaryInfo(employee);
+        Employee finalEmployee = employee;
         btnConfirmChange.setOnAction(event -> {
             if (!txtNewPass.getText().equals(txtConfirmNewPass.getText())) {
                 //TODO
                 //new pass n match
                 return;
             }
-            if (!checkPass(txtCurruntPass.getText(), employee.getPass())) {
+            if (!checkPass(txtCurruntPass.getText(), finalEmployee.getPass())) {
                 //TODO
                 return;
             }
@@ -52,7 +61,7 @@ public class EmployeeController {
                 //TODO
                 return;
             }
-            updatePass(employee, txtNewPass.getText());
+            updatePass(finalEmployee, txtNewPass.getText());
 
         });
         /* Event handlers for the side menu items */

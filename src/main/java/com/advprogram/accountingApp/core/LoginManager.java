@@ -9,6 +9,7 @@ import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.controller.AccountantController;
 import main.java.com.advprogram.accountingApp.controller.EmployeeController;
 import main.java.com.advprogram.accountingApp.controller.LoginController;
+import main.java.com.advprogram.accountingApp.model.User;
 
 /** Manages control flow for logins */
 public class LoginManager extends Node {
@@ -27,7 +28,7 @@ public class LoginManager extends Node {
         showAccountantView(accountant);
     }
 
-    public void authenticatedEmployee(Employee sessionID) { showEmployeeView(sessionID); }
+    public void authenticatedEmployee(User sessionID) { showEmployeeView(sessionID); }
 
     /**
      * Callback method invoked to notify that a user has logged out of the main application.
@@ -64,7 +65,7 @@ public class LoginManager extends Node {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void showEmployeeView(Employee employee) {
+    private void showEmployeeView(User user) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("../../../../res/layout/employeeView.fxml")
@@ -72,7 +73,7 @@ public class LoginManager extends Node {
             scene.setRoot(loader.load());
             EmployeeController controller =
                     loader.getController();
-            controller.initSessionID(this, employee);
+            controller.initSessionID(this, user);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }

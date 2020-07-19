@@ -32,7 +32,6 @@ public class AccountingApplication extends Application {
 
     /*
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
-    private static final GenericDao<Employee, Integer> CUSTOMER_DAO = new PostgreSqlGenericDao();
 
     public static void main(String[] args) {
         //Test whether an exception is thrown when

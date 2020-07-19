@@ -15,6 +15,11 @@ public class User {
 
     public User() { }
 
+    public User(int id, String pass) {
+        this.id = id;
+        this.pass = pass;
+    }
+
     public int getId() {
         return id;
     }

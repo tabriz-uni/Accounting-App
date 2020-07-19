@@ -1,8 +1,8 @@
-package main.java.com.advprogram.accountingApp.core;
+package main.java.com.advprogram.accountingApp.dao;
 
-import main.java.com.advprogram.accountingApp.model.GData;
+import main.java.com.advprogram.accountingApp.core.JdbcConnection;
 import main.java.com.advprogram.accountingApp.model.Employee;
-import main.java.com.advprogram.accountingApp.dao.GenericDao;
+import main.java.com.advprogram.accountingApp.model.GData;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
+public class EmployeeDaoImp implements EmployeeDao<Employee> {
 
-    private static final Logger LOGGER = Logger.getLogger(PostgreSqlGenericDao.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EmployeeDaoImp.class.getName());
     private final Optional<Connection> connection;
 
-    public PostgreSqlGenericDao() {
+    public EmployeeDaoImp() {
         this.connection = JdbcConnection.getConnection();
     }
 
@@ -25,7 +25,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
     public Optional<Employee> get(int id) {
         return connection.flatMap(conn -> {
             Optional<Employee> employee = Optional.empty();
-            String sql = "SELECT * FROM employee WHERE employee_id = " + id;
+            String sql = "SELECT * FROM employee WHERE user_id = " + id;
 
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
@@ -41,7 +41,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
                     int baseSalary = resultSet.getInt("base_salary");
 
                     employee = Optional.of(new Employee(id, firstName, lastName, pass,
-                                offsprings, title, workExp, workExpHere, baseSalary));
+                            offsprings, title, workExp, workExpHere, baseSalary));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", employee.get());
                 }
@@ -62,7 +62,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("employee_id");
+                    int id = resultSet.getInt("user_id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String pass = resultSet.getString("pass");
@@ -73,7 +73,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
                     int baseSalary = resultSet.getInt("base_salary");
 
                     Employee employee = new Employee(id, firstName, lastName, pass,
-                              offsprings, title, workExp, workExpHere, baseSalary);
+                            offsprings, title, workExp, workExpHere, baseSalary);
 
                     employees.add(employee);
 
@@ -93,7 +93,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
         String message = "The employee to be added should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
-                + "employee(employee_id, first_name, last_name, pass, " +
+                + "employee(user_id, first_name, last_name, pass, " +
                 "offsprings, title, work_exp, work_exp_here, base_salary) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -130,7 +130,7 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
                 + "last_name = ?, "
                 + "pass = ? "
                 + "WHERE "
-                + "employee_id = ?";
+                + "user_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -152,36 +152,10 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
     }
 
     @Override
-    public void updatePass(Employee employee) {
-        Employee nonNullCustomer = Objects.requireNonNull(employee);
-        String sql = "UPDATE employee "
-                + "SET "
-                + "pass = ? "
-                + "WHERE "
-                + "employee_id = ?";
-
-        connection.ifPresent(conn -> {
-            try (PreparedStatement statement = conn.prepareStatement(sql)) {
-
-                statement.setString(1, nonNullCustomer.getPass());
-                statement.setInt(2, nonNullCustomer.getId());
-
-                int numberOfUpdatedRows = statement.executeUpdate();
-
-                LOGGER.log(Level.INFO, "Was the employee updated successfully? {0}",
-                        numberOfUpdatedRows > 0);
-
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-    }
-
-    @Override
     public void delete(Employee employee) {
         String message = "The employee to be deleted should not be null";
         Employee nonNullCustomer = Objects.requireNonNull(employee, message);
-        String sql = "DELETE FROM employee WHERE employee_id = ?";
+        String sql = "DELETE FROM employee WHERE user_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -200,90 +174,28 @@ public class PostgreSqlGenericDao implements GenericDao<Employee, Integer> {
     }
 
     @Override
-    public GData getGData() {
-        String sql = "SELECT * FROM global_data LIMIT 1";
-        GData ref = new GData();
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
-                rs.next();
-                ref.setBaseSalary(rs.getInt("base_salary"));
-                ref.setBonMaskan(rs.getInt("bon_maskan"));
-                ref.setBonNagdi(rs.getInt("bon_nagdi"));
-                ref.setHagOlad(rs.getInt("hag_olad"));
-                ref.setPayeSanavat(rs.getInt("paye_sanavat"));
-                ref.setSabetHogug(rs.getInt("sabet_hogug"));
-                ref.setDate(rs.getDate("app_date"));
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-        return ref;
-    }
-    @Override
-    public void increExp() {
+    public void increEmployeeData(Optional<GData> ref) {
         String sql = "UPDATE employee " +
                 "SET " +
                 "work_exp = work_exp +1," +
                 "work_exp_here = work_exp_here + 1;";
-        connection.ifPresent(conn -> {
-            try(Statement statement = conn.createStatement()) {
-                statement.executeUpdate(sql);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });
-    }
-    @Override
-    public void increBaseSalary() {
-        GData ref = getGData();
+
         String sqlH = "UPDATE employee " +
                 "SET " +
-                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() + ref.getPayeSanavat() +
+                "base_salary = (base_salary * 1.15) +" + ref.get().getSabetHogug() + ref.get().getPayeSanavat() +
                 " WHERE work_exp_here >= 1";
         String sqlNH = "UPDATE employee " +
                 "SET " +
-                "base_salary = (base_salary * 1.15) +" + ref.getSabetHogug() +
+                "base_salary = (base_salary * 1.15) +" + ref.get().getSabetHogug() +
                 " WHERE work_exp_here < 1";
 
         connection.ifPresent(conn -> {
             try (Statement statement = conn.createStatement()){
+                statement.executeUpdate(sql);
                 statement.executeUpdate(sqlH);
                 statement.executeUpdate(sqlNH);
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-    }
-    @Override
-    public void increGlobalData() {
-        String sql = "UPDATE global_data "
-                + "SET "
-                + "bon_maskan = bon_maskan * 1.20, "
-                + "bon_nagdi = bon_nagdi * 1.30, "
-                + "hag_olad = hag_olad * 1.20, "
-                + "paye_sanavat = paye_sanavat * 1.20,"
-                + "sabet_hogug = (sabet_hogug * 1.20),"
-                + "base_salary = (base_salary * 1.20)";
-
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement()) {
-                statement.executeUpdate(sql);
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-    }
-    @Override
-    public void nextMonth() {
-        String sql = "UPDATE global_data "
-                + "SET "
-                + "app_date = app_date + INTERVAL '1 month'";
-        connection.ifPresent(conn -> {
-            try(Statement statement = conn.createStatement()) {
-                statement.executeUpdate(sql);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
         });
     }

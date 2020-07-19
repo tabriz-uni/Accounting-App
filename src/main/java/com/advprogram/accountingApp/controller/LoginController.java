@@ -6,14 +6,13 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import main.java.com.advprogram.accountingApp.AccountingApplication;
 import main.java.com.advprogram.accountingApp.core.LoginManager;
-import main.java.com.advprogram.accountingApp.dao.GenericDao;
 import main.java.com.advprogram.accountingApp.dao.UserDao;
 import main.java.com.advprogram.accountingApp.dao.UserDaoImp;
 import main.java.com.advprogram.accountingApp.model.Accountant;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
+import main.java.com.advprogram.accountingApp.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
 
 /** Controls the login screen */
 public class LoginController {
-    @FXML private TextField user;
+    @FXML private TextField userId;
     @FXML private TextField password;
     @FXML private Button loginButton;
     @FXML private Label showPasswordHover;
@@ -32,7 +31,7 @@ public class LoginController {
     private Accountant accountant = new Accountant(1, "Ali", "Shams","1");
 
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
-    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final UserDao<User> USER_DAO = new UserDaoImp();
 
     public void initialize() { }
     public void initManager(final LoginManager loginManager){
@@ -69,7 +68,7 @@ public class LoginController {
 
             else if (type.getValue() == 1)
             {
-                Employee Info;
+                User Info;
                 Info = authorizeEmployee();
                 if (Info == null)
                     InvalidCrdLbl.setVisible(true);
@@ -88,13 +87,13 @@ public class LoginController {
      * otherwise, return null.
      */
 
-    private Employee authorizeEmployee() {
+    private User authorizeEmployee() {
         try {
-            Employee employee = getEmployee(Integer.parseInt(user.getText()));
-            boolean correct = checkPass(password.getText(), employee.getPass());
+            User user = getUser(Integer.parseInt(userId.getText()));
+            boolean correct = checkPass(password.getText(), user.getPass());
             if (correct) {
                 InvalidCrdLbl.setVisible(false);
-                return employee;
+                return user;
             }
         } catch (NonExistentEntityException ex) {
             InvalidCrdLbl.setVisible(true);
@@ -104,7 +103,7 @@ public class LoginController {
     }
 
     private Accountant authorizeAccountant() {
-        if (user.getText().equals(String.valueOf(accountant.getId())) && password.getText().equals(accountant.getPass()))
+        if (userId.getText().equals(String.valueOf(accountant.getId())) && password.getText().equals(accountant.getPass()))
             return accountant;
         else
             return null;
@@ -117,8 +116,8 @@ public class LoginController {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 
-    private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = USER_DAO.get(id);
-        return employee.orElseThrow(NonExistentCustomerException::new);
+    private User getUser(int id) throws NonExistentEntityException {
+        Optional<User> user = USER_DAO.get(id);
+        return user.orElseThrow(NonExistentCustomerException::new);
     }
 }

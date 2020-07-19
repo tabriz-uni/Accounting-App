@@ -1,8 +1,6 @@
 package main.java.com.advprogram.accountingApp.dao;
 
 import main.java.com.advprogram.accountingApp.core.JdbcConnection;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
-import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
 
 import java.sql.*;
@@ -13,7 +11,7 @@ import java.util.logging.Logger;
 
 public class GDataDaoImp implements GDataDao<GData> {
 
-    private static final Logger LOGGER = Logger.getLogger(PostgreSqlGenericDao.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GDataDaoImp.class.getName());
     private final Optional<Connection> connection;
 
     public GDataDaoImp() {
