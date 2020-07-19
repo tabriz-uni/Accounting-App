@@ -10,9 +10,8 @@ import main.java.com.advprogram.accountingApp.core.Calculator;
 import main.java.com.advprogram.accountingApp.dao.*;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
-import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;

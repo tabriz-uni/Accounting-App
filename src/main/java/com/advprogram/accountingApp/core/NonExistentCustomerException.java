@@ -5,8 +5,6 @@
  */
 package main.java.com.advprogram.accountingApp.core;
 
-import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
-
 
 public class NonExistentCustomerException extends NonExistentEntityException {
 

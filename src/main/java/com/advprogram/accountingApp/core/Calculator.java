@@ -1,23 +1,27 @@
 package main.java.com.advprogram.accountingApp.core;
 
-import main.java.com.advprogram.accountingApp.dao.GenericDao;
+import main.java.com.advprogram.accountingApp.dao.*;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
 
+import java.util.Optional;
+
 public class Calculator {
-    private static final GenericDao<Employee, Integer> GENERIC_DAO = new PostgreSqlGenericDao();
-    GData gData= getGData();
+    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
+    Optional<GData> optionalGData = getGData();
+    GData gData= optionalGData.orElseThrow();
+
     private void nextMonth() {
-        gData = getGData();
-        GENERIC_DAO.nextMonth();
+        gData = getGData().get();
+        GDATA_DAO.nextMonth();
         if (getmonth() == 1)
             nextYear();
     }
     private void nextYear() {
         increGlobalData();
-        increExp();
-        increBaseSalary();
-        gData = getGData();
+        increEmployeeData();
+        gData = getGData().get();
     }
     private int calcEidi(Employee employee) {
         if (getmonth() == 12)
@@ -72,15 +76,12 @@ public class Calculator {
                 calcHagBime(employee) - calcTax(employee);
     }
 
-    private GData getGData() { return GENERIC_DAO.getGData(); }
-    private void increExp() {
-        GENERIC_DAO.increExp();
-    }
-    private void increBaseSalary() {
-        GENERIC_DAO.increBaseSalary();
+    private Optional<GData> getGData() { return GDATA_DAO.get(1); }
+    private void increEmployeeData() {
+        USER_DAO.increEmployeeData(getGData());
     }
     private void increGlobalData() {
-        GENERIC_DAO.increGlobalData();
+        GDATA_DAO.update(gData);
     }
     private int getmonth() {
         return gData.getDate().toLocalDate().getMonthValue();

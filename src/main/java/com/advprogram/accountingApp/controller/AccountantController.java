@@ -10,11 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.com.advprogram.accountingApp.core.LoginManager;
-import main.java.com.advprogram.accountingApp.api.*;
-import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
-import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
-import main.java.com.advprogram.accountingApp.dao.GenericDao;
+import main.java.com.advprogram.accountingApp.core.*;
+import main.java.com.advprogram.accountingApp.dao.*;
 import main.java.com.advprogram.accountingApp.model.Accountant;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
@@ -54,7 +51,8 @@ public class AccountantController {
     final ObservableList<EmployeeT> dataET =
             FXCollections.observableArrayList();
 
-    private static final GenericDao<Employee, Integer> GENERIC_DAO = new PostgreSqlGenericDao();
+    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
+    private static final GDataDao<GData> GDATA_DAO = new GDataDaoImp();
 
     public void initialize() { }
 
@@ -240,29 +238,29 @@ public class AccountantController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = GENERIC_DAO.get(id);
+        Optional<Employee> employee = USER_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
     private void updateEmployee(Employee employee) {
-        GENERIC_DAO.update(employee);
+        USER_DAO.update(employee);
     }
 
     public static Collection<Employee> getAllEmployees() {
-        return GENERIC_DAO.getAll();
+        return USER_DAO.getAll();
     }
     private void addEmployee(Employee employee) {
-        GENERIC_DAO.save(employee);
+        USER_DAO.save(employee);
     }
 
     private void nextMonth() {
-        GENERIC_DAO.nextMonth();
+        GDATA_DAO.nextMonth();
     }
     private LocalDate getDate() {
-        GData gData = getGData();
-        return gData.getDate().toLocalDate();
+        Optional<GData> gData = getGData();
+        return gData.get().getDate().toLocalDate();
     }
 
-    private GData getGData() { return GENERIC_DAO.getGData(); }
+    private Optional<GData> getGData() { return GDATA_DAO.get(0); }
 
     private String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());

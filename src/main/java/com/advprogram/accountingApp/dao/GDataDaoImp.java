@@ -85,41 +85,6 @@ public class GDataDaoImp implements GDataDao<GData> {
     }
 
     @Override
-    public void increExp() {
-        String sql = "UPDATE employee " +
-                "SET " +
-                "work_exp = work_exp +1," +
-                "work_exp_here = work_exp_here + 1;";
-        connection.ifPresent(conn -> {
-            try(Statement statement = conn.createStatement()) {
-                statement.executeUpdate(sql);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });
-    }
-    @Override
-    public void increBaseSalary() {
-        Optional<GData> ref = get(0);
-        String sqlH = "UPDATE employee " +
-                "SET " +
-                "base_salary = (base_salary * 1.15) +" + ref.get().getSabetHogug() + ref.get().getPayeSanavat() +
-                " WHERE work_exp_here >= 1";
-        String sqlNH = "UPDATE employee " +
-                "SET " +
-                "base_salary = (base_salary * 1.15) +" + ref.get().getSabetHogug() +
-                " WHERE work_exp_here < 1";
-
-        connection.ifPresent(conn -> {
-            try (Statement statement = conn.createStatement()){
-                statement.executeUpdate(sqlH);
-                statement.executeUpdate(sqlNH);
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-        });
-    }
-    @Override
     public void nextMonth() {
         String sql = "UPDATE global_data "
                 + "SET "

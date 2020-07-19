@@ -1,4 +1,4 @@
-package main.java.com.advprogram.accountingApp.api;
+package main.java.com.advprogram.accountingApp.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +95,7 @@ public final class PasswordGenerator {
         /**
          * Get an object to use.
          *
-         * @return the {@link main.java.com.advprogram.accountingApp.api.PasswordGenerator}
+         * @return the {@link PasswordGenerator}
          * object.
          */
         public PasswordGenerator build() {

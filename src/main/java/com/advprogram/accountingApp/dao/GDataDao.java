@@ -6,9 +6,5 @@ import java.util.Optional;
 
 public interface GDataDao<T> extends GenericDao<GData> {
 
-    void increExp();
-
-    void increBaseSalary();
-
     void nextMonth();
 }

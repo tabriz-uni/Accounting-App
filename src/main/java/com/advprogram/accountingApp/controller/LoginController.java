@@ -7,9 +7,11 @@ import javafx.scene.input.MouseEvent;
 import main.java.com.advprogram.accountingApp.AccountingApplication;
 import main.java.com.advprogram.accountingApp.core.LoginManager;
 import main.java.com.advprogram.accountingApp.dao.GenericDao;
+import main.java.com.advprogram.accountingApp.dao.UserDao;
+import main.java.com.advprogram.accountingApp.dao.UserDaoImp;
 import main.java.com.advprogram.accountingApp.model.Accountant;
 import main.java.com.advprogram.accountingApp.model.Employee;
-import main.java.com.advprogram.accountingApp.api.NonExistentEntityException;
+import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
 import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.core.PostgreSqlGenericDao;
 import org.mindrot.jbcrypt.BCrypt;
@@ -30,7 +32,7 @@ public class LoginController {
     private Accountant accountant = new Accountant(1, "Ali", "Shams","1");
 
     private static final Logger LOGGER = Logger.getLogger(AccountingApplication.class.getName());
-    private static final GenericDao<Employee, Integer> GENERIC_DAO = new PostgreSqlGenericDao();
+    private static final UserDao<Employee> USER_DAO = new UserDaoImp();
 
     public void initialize() { }
     public void initManager(final LoginManager loginManager){
@@ -116,7 +118,7 @@ public class LoginController {
     }
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
-        Optional<Employee> employee = GENERIC_DAO.get(id);
+        Optional<Employee> employee = USER_DAO.get(id);
         return employee.orElseThrow(NonExistentCustomerException::new);
     }
 }
