@@ -5,7 +5,6 @@ import java.util.logging.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import main.java.com.advprogram.accountingApp.model.Accountant;
-import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.controller.AccountantController;
 import main.java.com.advprogram.accountingApp.controller.EmployeeController;
 import main.java.com.advprogram.accountingApp.controller.LoginController;
@@ -41,7 +40,7 @@ public class LoginManager extends Node {
     public void showLoginScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../../../../res/layout/loginView.fxml")
+                    getClass().getResource("../../../../../res/layout/loginView.fxml")
             );
             scene.setRoot(loader.load());
             LoginController controller =
@@ -55,7 +54,7 @@ public class LoginManager extends Node {
     private void showAccountantView(Accountant accountant) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../../../../res/layout/accountantView.fxml")
+                    getClass().getResource("../../../../../res/layout/accountantView.fxml")
             );
             scene.setRoot(loader.load());
             AccountantController controller =
@@ -68,7 +67,7 @@ public class LoginManager extends Node {
     private void showEmployeeView(User user) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../../../../res/layout/employeeView.fxml")
+                    getClass().getResource("../../../../../res/layout/employeeView.fxml")
             );
             scene.setRoot(loader.load());
             EmployeeController controller =

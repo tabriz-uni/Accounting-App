@@ -24,7 +24,7 @@ public class UserDaoImp implements UserDao<User> {
     public Optional<User> get(int id) {
         return connection.flatMap(conn -> {
             Optional<User> user = Optional.empty();
-            String sql = "SELECT * FROM "user" WHERE user_id = " + id;
+            String sql = "SELECT * FROM 'user' WHERE user_id = " + id;
 
             try (Statement statement = conn.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {

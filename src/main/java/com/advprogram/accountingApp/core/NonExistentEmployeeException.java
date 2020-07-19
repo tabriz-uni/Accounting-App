@@ -6,11 +6,11 @@
 package main.java.com.advprogram.accountingApp.core;
 
 
-public class NonExistentCustomerException extends NonExistentEntityException {
+public class NonExistentEmployeeException extends NonExistentEntityException {
 
     private static final long serialVersionUID = 8633588908169766368L;
 
-    public NonExistentCustomerException() {
+    public NonExistentEmployeeException() {
         super("Employee does not exist");
     }
 

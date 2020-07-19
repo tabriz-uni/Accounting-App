@@ -241,7 +241,7 @@ public class AccountantController {
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
         Optional<Employee> employee = EMPLOYEE_DAO.get(id);
-        return employee.orElseThrow(NonExistentCustomerException::new);
+        return employee.orElseThrow(NonExistentEmployeeException::new);
     }
     private void updateEmployee(Employee employee) {
         EMPLOYEE_DAO.update(employee);

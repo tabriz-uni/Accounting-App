@@ -22,7 +22,7 @@
                     </font>
                 </Label>
                 <AnchorPane layoutX="93.0" layoutY="55.0" prefHeight="7.0" prefWidth="134.0" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" />
-                <JFXTextField fx:id="user" layoutX="69.0" layoutY="107.0" prefHeight="26.0" prefWidth="237.0" promptText="Personnel ID" styleClass="text-white" stylesheets="@../css/style.css" />
+                <JFXTextField fx:id="userId" layoutX="69.0" layoutY="107.0" prefHeight="26.0" prefWidth="237.0" promptText="Personnel ID" styleClass="text-white" stylesheets="@../css/style.css" />
                 <JFXPasswordField fx:id="password" layoutX="70.0" layoutY="163.0" prefHeight="26.0" prefWidth="237.0" promptText="Password" styleClass="text-white" stylesheets="@../css/style.css" />
                 <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="48.0" layoutY="298.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="224.0" ripplerFill="#e210e2" style="-fx-background-color: #673ab7; -fx-background-radius: 90;" text="Login" textFill="WHITE">
                     <font>

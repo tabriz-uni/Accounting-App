@@ -11,7 +11,7 @@ import main.java.com.advprogram.accountingApp.dao.*;
 import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.model.GData;
 import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
-import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
+import main.java.com.advprogram.accountingApp.core.NonExistentEmployeeException;
 import main.java.com.advprogram.accountingApp.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -148,7 +148,7 @@ public class EmployeeController {
 
     private Employee getEmployee(int id) throws NonExistentEntityException {
         Optional<Employee> employee = USER_DAO.get(id);
-        return employee.orElseThrow(NonExistentCustomerException::new);
+        return employee.orElseThrow(NonExistentEmployeeException::new);
     }
 
     private String hashPassword(String plainTextPassword){

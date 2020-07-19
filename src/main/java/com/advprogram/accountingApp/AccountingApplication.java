@@ -63,7 +63,7 @@ public class AccountingApplication extends Application {
 
     public static Employee getCustomer(int id) throws NonExistentEntityException {
         Optional<Employee> customer = CUSTOMER_DAO.get(id);
-        return customer.orElseThrow(NonExistentCustomerException::new);
+        return customer.orElseThrow(NonExistentEmployeeException::new);
     }
 
     public static Collection<Employee> getAllCustomers() {

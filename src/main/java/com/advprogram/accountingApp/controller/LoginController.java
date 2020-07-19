@@ -6,12 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import main.java.com.advprogram.accountingApp.AccountingApplication;
 import main.java.com.advprogram.accountingApp.core.LoginManager;
+import main.java.com.advprogram.accountingApp.core.NonExistentEmployeeException;
 import main.java.com.advprogram.accountingApp.dao.UserDao;
 import main.java.com.advprogram.accountingApp.dao.UserDaoImp;
 import main.java.com.advprogram.accountingApp.model.Accountant;
-import main.java.com.advprogram.accountingApp.model.Employee;
 import main.java.com.advprogram.accountingApp.core.NonExistentEntityException;
-import main.java.com.advprogram.accountingApp.core.NonExistentCustomerException;
 import main.java.com.advprogram.accountingApp.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -118,6 +117,6 @@ public class LoginController {
 
     private User getUser(int id) throws NonExistentEntityException {
         Optional<User> user = USER_DAO.get(id);
-        return user.orElseThrow(NonExistentCustomerException::new);
+        return user.orElseThrow(NonExistentEmployeeException::new);
     }
 }
