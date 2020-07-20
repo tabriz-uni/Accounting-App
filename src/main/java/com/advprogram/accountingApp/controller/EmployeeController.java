@@ -47,6 +47,7 @@ public class EmployeeController {
         if (!employee.isWorkedToday()){
             employee.setWorkedDays(employee.getWorkedDays() + 1);
             employee.setWorkedToday(true);
+            System.out.println("hey");
         }
         updateEmployee(employee);
         setProfileInfo(employee);

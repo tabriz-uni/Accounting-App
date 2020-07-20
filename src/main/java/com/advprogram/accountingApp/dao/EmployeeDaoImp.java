@@ -95,7 +95,7 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
     @Override
     public void save(Employee employee) {
         String message = "The employee to be added should not be null";
-        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
+        Employee nonNullEmployee = Objects.requireNonNull(employee, message);
         String sql = "INSERT INTO "
                 + "employee(user_id, first_name, last_name, pass, " +
                 "offsprings, title, work_exp, work_exp_here, base_salary) "
@@ -104,20 +104,20 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
-                statement.setInt(1, nonNullCustomer.getId());
-                statement.setString(2, nonNullCustomer.getFirstName());
-                statement.setString(3, nonNullCustomer.getLastName());
-                statement.setString(4, nonNullCustomer.getPass());
-                statement.setInt(5, nonNullCustomer.getOffsprings());
-                statement.setString(6, nonNullCustomer.getTitle());
-                statement.setInt(7, nonNullCustomer.getWorkExp());
-                statement.setInt(8, nonNullCustomer.getWorkExpHere());
-                statement.setInt(9, nonNullCustomer.getBaseSalary());
+                statement.setInt(1, nonNullEmployee.getId());
+                statement.setString(2, nonNullEmployee.getFirstName());
+                statement.setString(3, nonNullEmployee.getLastName());
+                statement.setString(4, nonNullEmployee.getPass());
+                statement.setInt(5, nonNullEmployee.getOffsprings());
+                statement.setString(6, nonNullEmployee.getTitle());
+                statement.setInt(7, nonNullEmployee.getWorkExp());
+                statement.setInt(8, nonNullEmployee.getWorkExpHere());
+                statement.setInt(9, nonNullEmployee.getBaseSalary());
 
                 int numberOfInsertedRows = statement.executeUpdate();
 
                 LOGGER.log(Level.INFO, "{0} created successfully? {1}",
-                        new Object[]{nonNullCustomer, numberOfInsertedRows > 0});
+                        new Object[]{nonNullEmployee, numberOfInsertedRows > 0});
             } catch (SQLException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
@@ -127,22 +127,26 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
     @Override
     public void update(Employee employee) {
         String message = "The employee to be updated should not be null";
-        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
+        Employee nonNullEmployee = Objects.requireNonNull(employee, message);
         String sql = "UPDATE employee "
                 + "SET "
                 + "first_name = ?, "
                 + "last_name = ?, "
-                + "pass = ? "
+                + "pass = ?, "
+                + "days_worked = ?, "
+                + "worked_today = ?"
                 + "WHERE "
                 + "user_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
-                statement.setString(1, nonNullCustomer.getFirstName());
-                statement.setString(2, nonNullCustomer.getLastName());
-                statement.setString(3, nonNullCustomer.getPass());
-                statement.setInt(4, nonNullCustomer.getId());
+                statement.setString(1, nonNullEmployee.getFirstName());
+                statement.setString(2, nonNullEmployee.getLastName());
+                statement.setString(3, nonNullEmployee.getPass());
+                statement.setInt(4, nonNullEmployee.getWorkedDays());
+                statement.setBoolean(5, nonNullEmployee.isWorkedToday());
+                statement.setInt(6, nonNullEmployee.getId());
 
                 int numberOfUpdatedRows = statement.executeUpdate();
 
@@ -158,13 +162,13 @@ public class EmployeeDaoImp implements EmployeeDao<Employee> {
     @Override
     public void delete(Employee employee) {
         String message = "The employee to be deleted should not be null";
-        Employee nonNullCustomer = Objects.requireNonNull(employee, message);
+        Employee nonNullEmployee = Objects.requireNonNull(employee, message);
         String sql = "DELETE FROM employee WHERE user_id = ?";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
-                statement.setInt(1, nonNullCustomer.getId());
+                statement.setInt(1, nonNullEmployee.getId());
 
                 int numberOfDeletedRows = statement.executeUpdate();
 

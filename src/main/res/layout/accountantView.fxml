@@ -94,7 +94,7 @@
                   <padding>
                      <Insets left="-2.0" right="-2.0" />
                   </padding></JFXButton>
-               <JFXButton fx:id="btnNextDayPage" alignment="CENTER" layoutX="10.0" layoutY="257.0" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="  Next month" textAlignment="CENTER" textFill="WHITE">
+               <JFXButton fx:id="btnNextDayPage" alignment="CENTER" layoutX="10.0" layoutY="257.0" prefHeight="65.0" prefWidth="110.0" style="-fx-background-color: #673ab7; -fx-background-radius: 70;" text="  Next day" textAlignment="CENTER" textFill="WHITE">
                   <padding>
                      <Insets left="-2.0" right="-2.0" />
                   </padding></JFXButton>
@@ -334,7 +334,7 @@
                <children>
                   <AnchorPane layoutX="218.0" layoutY="91.0" prefHeight="245.0" prefWidth="343.0" style="-fx-background-color: #7c15eb; -fx-background-radius: 70;">
                      <children>
-                        <JFXButton fx:id="btnNextDay" alignment="CENTER" buttonType="RAISED" layoutX="104.0" layoutY="152.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="136.0" style="-fx-background-color: #449416; -fx-background-radius: 70;" text="Next month">
+                        <JFXButton fx:id="btnNextDay" alignment="CENTER" buttonType="RAISED" layoutX="104.0" layoutY="152.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="136.0" style="-fx-background-color: #449416; -fx-background-radius: 70;" text="Next day">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
